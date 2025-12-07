@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= data.title %></title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+
+<body class="bg-slate-100 min-h-screen flex items-center justify-center p-4 sm:p-6">
+  <div class="w-full max-w-3xl bg-white rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden">
+
+    <!-- Header -->
+    <div class="px-4 sm:px-8 py-5 sm:py-6 flex items-center gap-3 sm:gap-4 border-b border-slate-200">
+
+      <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-blue-500/10 flex items-center justify-center">
+        <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl bg-blue-500 flex items-center justify-center text-white text-lg sm:text-xl">
+          📁
+        </div>
+      </div>
+
+      <div class="flex-1 min-w-0">
+        <h1 class="text-xl sm:text-2xl font-bold text-slate-900 leading-tight truncate"><%= data.title %></h1>
+        <p class="text-xs sm:text-sm text-slate-500 mt-1 leading-snug"><%= data.description %></p>
+      </div>
+
+    </div>
+
+    <!-- Accordion -->
+    <div class="p-4 sm:p-6 space-y-4">
+
+      <% data.files.forEach((file, i) => { %>
+      <div class="border rounded-xl sm:rounded-2xl overflow-hidden shadow-sm">
+
+        <!-- Accordion Header -->
+        <button
+          type="button"
+          class="w-full flex items-center justify-between gap-3 sm:gap-4 p-4 sm:p-5 bg-slate-50 hover:bg-blue-50 transition-all duration-300 hover:-translate-y-0.5"
+          onclick="toggleAccordion(<%= i %>)"
+        >
+          <div class="flex items-start gap-3 sm:gap-4 min-w-0">
+
+            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-blue-500/10 flex items-center justify-center flex-shrink-0">
+              <span class="text-blue-500 text-xl sm:text-2xl">📘</span>
+            </div>
+
+            <div class="text-left min-w-0">
+              <h2 class="text-base sm:text-lg font-semibold text-slate-900 leading-tight"><%= file.title %></h2>
+              <p class="text-xs sm:text-sm text-slate-500 leading-snug"><%= file.desc %></p>
+            </div>
+          </div>
+
+          <span class="text-lg sm:text-xl text-slate-500 flex-shrink-0" id="icon-<%= i %>">+</span>
+        </button>
+
+        <!-- Accordion Content -->
+        <div id="acc-<%= i %>" class="hidden bg-white border-t">
+          <div class="p-3 sm:p-4 space-y-2">
+
+            <% (file.items || []).forEach(item => { %>
+            <a href="<%= item.link %>"
+               class="block p-3 rounded-lg sm:rounded-xl bg-slate-100 hover:bg-blue-100 transition flex items-center gap-3 sm:gap-4" download>
+              <span class="text-blue-500 text-lg sm:text-xl">📄</span>
+              <span class="font-medium text-slate-700 text-sm sm:text-base"><%= item.name %></span>
+            </a>
+            <% }) %>
+
+          </div>
+        </div>
+
+      </div>
+      <% }) %>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="py-4 sm:py-5 text-center text-xs sm:text-sm text-slate-500 border-t">
+      <b><%= data.files.length %> lessons available</b>
+    </div>
+
+  </div>
+
+  <!-- Accordion JS -->
+  <script>
+    function toggleAccordion(index) {
+      const section = document.getElementById(`acc-${index}`);
+      const icon = document.getElementById(`icon-${index}`);
+
+      if (!section || !icon) return;
+
+      const isOpen = !section.classList.contains("hidden");
+
+      if (isOpen) {
+        section.classList.add("hidden");
+        icon.textContent = "+";
+      } else {
+        section.classList.remove("hidden");
+        icon.textContent = "−";
+      }
+    }
+  </script>
+
+</body>
+</html>
