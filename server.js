@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const path = require("path");
 
@@ -135,6 +136,21 @@ app.get("/physci/mini-quiz1", (req, res) => {
     subject: "physci",
     quizId: "miniQuiz1",
     questions: quizData.physci.miniQuiz1
+  });
+});
+
+app.get("/movies/:id", (req, res) => {
+  const movieId = req.params.id;
+  res.render("movies", { 
+    movieId,
+    tmdbApiKey: process.env.TMDB_API_KEY || ''
+  });
+});
+
+app.get("/movies", (req, res) => {
+  res.render("movies", { 
+    movieId: null,
+    tmdbApiKey: process.env.TMDB_API_KEY || ''
   });
 });
 
