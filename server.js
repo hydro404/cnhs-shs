@@ -41,6 +41,37 @@ const subjects = {
       },
       
     ]
+  },
+  mil:{
+    title: "Media and Information Literacy Materials",
+    description: "Click to download lesson modules and activities.",
+    files: [
+      {
+        title: "Lesson 1",
+        desc: "Introduction to Media and Information Literacy",
+        items: [
+          { name: "MIL Lesson 1.pdf", link: "./files/media/MIL Lesson 1.pdf", type: "pdf" },
+          { name: "MIL-Activity-1.png", link: "./files/media/MIL Activity 1.png", type: "png" },
+        ]
+      },
+      {
+        title: "Lesson 2",
+        desc: "Media, Technology, and Information Literacy",
+        items: [
+          { name: "MIL Lesson 2.pdf", link: "./files/media/MIL Lesson 2.pdf", type: "pdf" },
+          { name: "MIL-Activity-2.pdf", link: "./files/media/MIL Activity 2.pdf", type: "pdf" },
+        ]
+      },
+      {
+        title: "Lesson 3",
+        desc: "The Evolution of Traditional to New Media",
+        items: [
+          { name: "MIL Lesson 3.pdf", link: "./files/media/MIL Lesson 3.pdf", type: "pdf" },
+          { name: "MIL-Activity-3.pdf", link: "./files/media/MIL Activity 3.pdf", type: "pdf" },
+        ]
+      },
+      
+    ]
   }
 };
 
