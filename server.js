@@ -39,6 +39,13 @@ const subjects = {
           { name: "Physical-Science-Activity-2.pdf", link: "./files/physci/Physical-Science-Activity-2.pdf", type: "pdf" },
         ]
       },
+      {
+        title: "Lesson 3",
+        desc: "Ideas of Ancient Greeks on Atoms and Elements",
+        items: [
+          { name: "Physical Science Lesson 3.pdf", link: "./files/physci/Physical Science Lesson 3.pdf", type: "pdf" },
+        ]
+      }
       
     ]
   },
