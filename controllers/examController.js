@@ -1,6 +1,25 @@
 const ExamModel = require('../models/examModel');
 const fs = require('fs');
 const path = require('path');
+// API: Check if nickname exists for subject and strand
+const express = require('express');
+const router = express.Router();
+
+router.get('/api/leaderboard', async (req, res) => {
+  const { subject, strand, nickname } = req.query;
+  if (!subject || !strand || !nickname) {
+    return res.json({ exists: false });
+  }
+  try {
+    // Query leaderboard for this subject and strand
+    const leaderboard = await ExamModel.getLeaderboard(subject, strand, 1000);
+    const exists = leaderboard.some(entry => entry.nickname && entry.nickname.toLowerCase() === nickname.toLowerCase());
+    res.json({ exists });
+  } catch (error) {
+    res.json({ exists: false });
+  }
+});
+
 
 // Subject configuration
 const SUBJECTS = {
@@ -49,19 +68,17 @@ function shuffleArray(array) {
 }
 
 // Helper function to randomize question and option order
-function randomizeQuestions(questions, count = 10) {
+function randomizeQuestions(questions, count) {
   // Shuffle questions
   const shuffledQuestions = shuffleArray(questions);
-  
-  // Return only the requested count, with randomized options
-  return shuffledQuestions.slice(0, count).map(q => {
+  // If count is not provided, show all questions
+  const limit = typeof count === 'number' ? count : shuffledQuestions.length;
+  return shuffledQuestions.slice(0, limit).map(q => {
     // Create array with original indices
     const optionsWithIndex = q.options.map((opt, idx) => ({ text: opt, originalIdx: idx }));
     const shuffledOptions = shuffleArray(optionsWithIndex);
-    
     // Find where the correct answer ended up
     const correctIndex = shuffledOptions.findIndex(opt => opt.originalIdx === q.correct);
-    
     return {
       id: q.id,
       question: q.question,
@@ -227,7 +244,7 @@ const examController = {
 
     // Load and randomize questions for the subject
     const allQuestions = loadQuestions(subject);
-    const randomizedQuestions = randomizeQuestions(allQuestions, 10);
+    const randomizedQuestions = randomizeQuestions(allQuestions);
     res.json({ questions: randomizedQuestions });
   },
 
@@ -248,4 +265,5 @@ const examController = {
   }
 };
 
+examController.router = router;
 module.exports = examController;

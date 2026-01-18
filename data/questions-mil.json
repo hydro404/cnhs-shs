@@ -1,112 +1,339 @@
 [
   {
     "id": 1,
-    "question": "What is media literacy?",
-    "options": [
-      "The ability to use social media",
-      "The ability to access, analyze, evaluate, and create media",
-      "The ability to read newspapers",
-      "The ability to watch television"
-    ],
-    "correct": 1
+    "question": "The means of communication, such as radio, television, magazines, or the internet are referred to as:",
+    "options": ["media", "noise", "context", "information"],
+    "correct": 0
   },
   {
     "id": 2,
-    "question": "Which of the following is NOT a type of media?",
+    "question": "The following are the positive effect of media to communication EXCEPT:",
     "options": [
-      "Television",
-      "Radio",
-      "Newspapers",
-      "Water"
-    ],
-    "correct": 3
-  },
-  {
-    "id": 3,
-    "question": "What is the primary purpose of media?",
-    "options": [
-      "To entertain only",
-      "To inform, educate, and entertain",
-      "To confuse people",
-      "To sell products only"
-    ],
-    "correct": 1
-  },
-  {
-    "id": 4,
-    "question": "Which medium has the widest reach in the Philippines?",
-    "options": [
-      "Newspapers",
-      "Radio",
-      "Television",
-      "Internet"
+      "used as tools for sharing information, ideas, and messages",
+      "great ways to connect with friends and families",
+      "utilized to deceive, confuse and misinform people",
+      "source of entertainment"
     ],
     "correct": 2
   },
   {
-    "id": 5,
-    "question": "What does 'bias' in media mean?",
-    "options": [
-      "Being fair and balanced",
-      "Having a prejudiced or one-sided view",
-      "Using proper grammar",
-      "Having good production quality"
-    ],
+    "id": 3,
+    "question": "The positive impact of information and technology to society are enumerated below, the one that is NOT is:",
+    "options": ["V", "IV", "III", "II"],
     "correct": 1
+  },
+  {
+    "id": 4,
+    "question": "Messages, pieces of thoughts, ideas, knowledge that are transmitted to other people.",
+    "options": ["Media", "Technology", "Information", "Social Media"],
+    "correct": 2
+  },
+  {
+    "id": 5,
+    "question": "It is the ability of an individual, either working independently or with others, to responsibly, appropriately, and effectively use technological tools.",
+    "options": ["Media Literacy", "Information Literacy", "Technology Literacy", "Media and Information Literacy"],
+    "correct": 2
   },
   {
     "id": 6,
-    "question": "Which of the following is a credible source of information?",
-    "options": [
-      "Random social media posts",
-      "Peer-reviewed academic journals",
-      "Rumors from friends",
-      "Unverified websites"
-    ],
-    "correct": 1
+    "question": "The essential skills and competencies that allow individuals to engage with media and other information providers effectively, as well as develop critical thinking and life-long learning skills to socialize and become active citizens.",
+    "options": ["Media Literacy", "Information Literacy", "Technology Literacy", "Media and Information Literacy"],
+    "correct": 3
   },
   {
     "id": 7,
-    "question": "What is 'fake news'?",
-    "options": [
-      "News from the past",
-      "False information presented as factual",
-      "News that is entertaining",
-      "News from other countries"
-    ],
+    "question": "This type of literacy identifies what the information is for, where to find it, and how to evaluate it.",
+    "options": ["Media Literacy", "Information Literacy", "Technology Literacy", "Media and Information Literacy"],
     "correct": 1
   },
   {
     "id": 8,
-    "question": "Which skill is essential for media literacy?",
-    "options": [
-      "Critical thinking",
-      "Sleeping",
-      "Cooking",
-      "Dancing"
-    ],
+    "question": "The ability to access, analyze, evaluate and produce communication in a variety of media forms, e.g. television, print, radio, etc.",
+    "options": ["Media Literacy", "Media Education", "Technology Literacy", "Technology Education"],
     "correct": 0
   },
   {
     "id": 9,
-    "question": "What is 'propaganda'?",
+    "question": "The following are importance of media and information literacy to people EXCEPT:",
     "options": [
-      "A type of music",
-      "Information designed to promote a particular viewpoint",
-      "A cooking method",
-      "A type of sport"
+      "It encourages critical thinking.",
+      "It allows you to use and share sources of media responsibly.",
+      "It causes you to be a target of fake news.",
+      "It teaches you how to verify information"
+    ],
+    "correct": 2
+  },
+  {
+    "id": 10,
+    "question": "This refers to the type of media wherein contents are organized and distributed on digital platforms",
+    "options": ["Print Media", "Broadcast Media", "New Media", "None of the above"],
+    "correct": 2
+  },
+  {
+    "id": 11,
+    "question": "Josh, a student content creator, loves to do live streaming on his TikTok account during weekends. What type of media does this belong to?",
+    "options": ["Print Media", "Broadcast Media", "New Media", "None of the above"],
+    "correct": 2
+  },
+  {
+    "id": 12,
+    "question": "Ken wants her content to go viral. What type of media will best satisfy her goal?",
+    "options": ["New Media", "Television", "Print Media", "Radio"],
+    "correct": 0
+  },
+  {
+    "id": 13,
+    "question": "A news organization produces articles for print, videos for television, and posts updates on social media platforms. Why is this an example of media convergence?",
+    "options": [
+      "It focuses on one type of media only",
+      "It limits the audience’s access to information",
+      "It combines different media platforms to deliver content",
+      "It replaces traditional media completely"
+    ],
+    "correct": 2
+  },
+  {
+    "id": 14,
+    "question": "Justin reads news articles from a newspaper that he buys from a newsstand every morning. What type of media is this?",
+    "options": ["Broadcast Media", "New Media", "Print Media", "Social Media"],
+    "correct": 2
+  },
+  {
+    "id": 15,
+    "question": "DZBB Super Radyo airs a live morning program featuring news updates and music that people listen to through a radio. What type of media does this represent?",
+    "options": ["Print Media", "New Media", "Broadcast Media", "Traditional Media"],
+    "correct": 2
+  },
+  {
+    "id": 16,
+    "question": "A student uploads short educational videos on Facebook and TikTok for public viewing. What type of media is used?",
+    "options": ["Print Media", "New Media", "Broadcast Media", "Traditional Media"],
+    "correct": 1
+  },
+  {
+    "id": 17,
+    "question": "Which of the following is an example of New Media content?",
+    "options": ["A printed textbook", "A television news program", "An online blog with comment sections", "A radio documentary"],
+    "correct": 2
+  },
+  {
+    "id": 18,
+    "question": "This consists of using spoken and written words to convey information and the message to the other person.",
+    "options": ["Verbal communication", "Non-verbal Communication", "Information", "Technology"],
+    "correct": 0
+  },
+  {
+    "id": 19,
+    "question": "This refers to the process of sharing and conveying messages or information from one person to another within and across channels, contexts, media and cultures.",
+    "options": ["Knowledge", "Communication", "Information", "Technology"],
+    "correct": 1
+  },
+  {
+    "id": 20,
+    "question": "This refers to the application of scientific knowledge to the practical aims of human life or to change and manipulate the human environment.",
+    "options": ["Media", "Technology", "Information", "Communication"],
+    "correct": 1
+  },
+  {
+    "id": 21,
+    "question": "This refers to the processed data and/or knowledge derived from study, experience, instruction, signals, or symbols.",
+    "options": ["Media", "Technology", "Information", "Communication"],
+    "correct": 2
+  },
+  {
+    "id": 22,
+    "question": "You saw a post on Facebook that classes are suspended tomorrow but you do not know who posted the information. What will you do?",
+    "options": [
+      "I will immediately share the post.",
+      "I will inform my friends that classes are suspended tomorrow.",
+      "I will verify the information by looking for a reliable source.",
+      "I will announce the information to our group chat."
+    ],
+    "correct": 2
+  },
+  {
+    "id": 23,
+    "question": "Which of the following best describes media literacy?",
+    "options": [
+      "The ability to understand and evaluate information from different sources",
+      "The ability to effectively use and navigate digital devices and platforms",
+      "The ability to access, analyze, and create media in various forms",
+      "The ability to store and retrieve information from books and databases"
+    ],
+    "correct": 2
+  },
+  {
+    "id": 24,
+    "question": "Pablo is researching a controversial topic online. To verify the credibility of a source, he check the author’s background, compare information across different websites, and evaluate the website’s domain (.gov, .edu, .com). Which type of literacy is primarily being used?",
+    "options": ["Media literacy", "Information literacy", "Technology literacy", "Digital fluency"],
+    "correct": 1
+  },
+  {
+    "id": 25,
+    "question": "A teacher assigns a project where students must create a short video explaining the impact of social media. The students must script, film, edit, and share their work responsibly. This activity best develops which type of literacy?",
+    "options": ["Media literacy", "Information literacy", "Technology literacy", "Digital ethics"],
+    "correct": 0
+  },
+  {
+    "id": 26,
+    "question": "A group of students is working on a media and information literacy project that requires them to collect data, use spreadsheet software to analyze trends, and create a digital presentation. This situation best demonstrates which literacy?",
+    "options": ["Media literacy", "Information literacy", "Technology literacy", "Research literacy"],
+    "correct": 2
+  },
+  {
+    "id": 27,
+    "question": "Stell is given a research task that requires him to use online databases, evaluate news articles for bias, and properly cite sources. Which two literacies are most relevant in this situation?",
+    "options": [
+      "Media and information literacy",
+      "Information and technology literacy",
+      "Media and technology literacy",
+      "Digital and media literacy"
+    ],
+    "correct": 0
+  },
+  {
+    "id": 28,
+    "question": "Which of the following is the best way to check if a new article is trustworthy?",
+    "options": [
+      "Looking at the author’s name and believing everything.",
+      "Trusting the article if it has many likes and shares.",
+      "Believing it if the headline sounds interesting and shocking.",
+      "Checking if the information is also reported by reliable news sources."
+    ],
+    "correct": 3
+  },
+  {
+    "id": 29,
+    "question": "Which of the following is the best way to determine the reliability of a news website?",
+    "options": [
+      "Check if the website is well-designed.",
+      "Verifying information from multiple reputable sources.",
+      "Reading the comment section for opinions from readers.",
+      "Trusting it if the website has a large number of followers."
     ],
     "correct": 1
   },
   {
-    "id": 10,
-    "question": "How can you verify information from an online source?",
+    "id": 30,
+    "question": "You are assigned to write a report on the effects of social media on mental health. Which of the following is the most reliable source to use?",
     "options": [
-      "Assume it's true if it looks professional",
-      "Check multiple reliable sources",
-      "Only believe what your friends share",
-      "Ignore it completely"
+      "A YouTube influencer’s video discussing personal experience.",
+      "A research article published by a university psychology department.",
+      "A social media post that went viral",
+      "A blog written by an anonymous author"
     ],
     "correct": 1
+  },
+  {
+    "id": 31,
+    "question": "A student watches news videos, listens to music, reads articles, and shares posts on Facebook using only a smartphone. Why can this situation be considered an example of media convergence?",
+    "options": [
+      "Because Facebook is a popular application",
+      "Because one device combines different types of media",
+      "Because smartphones replace books and radio",
+      "Because social media is used for entertainment only"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 32,
+    "question": "Which statement BEST evaluates the effect of media convergence on how people access information today?",
+    "options": [
+      "It limits people to using only one type of media",
+      "It makes information slower to receive",
+      "It allows people to access different media contents using a single device",
+      "It removes the need for communication"
+    ],
+    "correct": 2
+  },
+  {
+    "id": 33,
+    "question": "Early large-scale computers",
+    "options": ["Pre-industrial Age", "Industrial Age", "Electronic Age", "New/Information Age"],
+    "correct": 2
+  },
+  {
+    "id": 34,
+    "question": "Forged Weapons through bronze",
+    "options": ["Pre-industrial Age", "Industrial Age", "Electronic Age", "New/Information Age"],
+    "correct": 0
+  },
+  {
+    "id": 35,
+    "question": "Invention of Personal Computers",
+    "options": ["Pre-industrial Age", "Industrial Age", "Electronic Age", "New/Information Age"],
+    "correct": 3
+  },
+  {
+    "id": 36,
+    "question": "Invention of mobile devices",
+    "options": ["Pre-industrial Age", "Industrial Age", "Electronic Age", "New/Information Age"],
+    "correct": 3
+  },
+  {
+    "id": 37,
+    "question": "Used the power of steam",
+    "options": ["Pre-industrial Age", "Industrial Age", "Electronic Age", "New/Information Age"],
+    "correct": 1
+  },
+  {
+    "id": 38,
+    "question": "Telegraph",
+    "options": ["Pre-industrial Age", "Industrial Age", "Electronic Age", "New/Information Age"],
+    "correct": 2
+  },
+  {
+    "id": 39,
+    "question": "Established iron production",
+    "options": ["Pre-industrial Age", "Industrial Age", "Electronic Age", "New/Information Age"],
+    "correct": 1
+  },
+  {
+    "id": 40,
+    "question": "Invention of wearable technologies",
+    "options": ["Pre-industrial Age", "Industrial Age", "Electronic Age", "New/Information Age"],
+    "correct": 3
+  },
+  {
+    "id": 41,
+    "question": "Creation of social network",
+    "options": ["Pre-industrial Age", "Industrial Age", "Electronic Age", "New/Information Age"],
+    "correct": 3
+  },
+  {
+    "id": 42,
+    "question": "Developed paper from plants",
+    "options": ["Pre-industrial Age", "Industrial Age", "Electronic Age", "New/Information Age"],
+    "correct": 0
+  },
+  {
+    "id": 43,
+    "question": "Portable computers",
+    "options": ["Pre-industrial Age", "Industrial Age", "Electronic Age", "New/Information Age"],
+    "correct": 3
+  },
+  {
+    "id": 44,
+    "question": "Newspaper – The London Gazette",
+    "options": ["Pre-industrial Age", "Industrial Age", "Electronic Age", "New/Information Age"],
+    "correct": 1
+  },
+  {
+    "id": 45,
+    "question": "Cave Paintings",
+    "options": ["Pre-industrial Age", "Industrial Age", "Electronic Age", "New/Information Age"],
+    "correct": 0
+  },
+  {
+    "id": 46,
+    "question": "Microblogging sites",
+    "options": ["Pre-industrial Age", "Industrial Age", "Electronic Age", "New/Information Age"],
+    "correct": 3
+  },
+  {
+    "id": 47,
+    "question": "Telephone",
+    "options": ["Pre-industrial Age", "Industrial Age", "Electronic Age", "New/Information Age"],
+    "correct": 2
   }
 ]

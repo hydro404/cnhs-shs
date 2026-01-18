@@ -34,6 +34,11 @@ app.get("/leaderboard/:subject", examController.showLeaderboard);
 app.get("/api/questions", examController.getQuestions);
 app.get("/api/leaderboard/:subject", examController.getLeaderboardJson);
 
+// Mount examController router for /api/leaderboard nickname check
+if (examController.router) {
+  app.use(examController.router);
+}
+
 // === JSON DATA (NO DATABASE NEEDED) ===
 const subjects = {
   physci: {

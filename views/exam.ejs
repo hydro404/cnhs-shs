@@ -174,20 +174,72 @@
                 return;
             }
 
-            // Check if questions are loaded
-            if (!questions || questions.length === 0) {
-                alert('Questions are still loading. Please wait a moment and try again.');
-                return;
-            }
-            
-            document.getElementById('startFormContainer').classList.add('hidden');
-            document.getElementById('quizContainer').classList.remove('hidden');
-            // Start total time tracker
-            totalTimerInterval = setInterval(() => {
-                totalTime++;
-            }, 1000);
-            
-            loadQuestion();
+            // Remove any previous validation message and is-invalid class
+            let validationMsg = document.getElementById('nicknameValidationMsg');
+            if (validationMsg) validationMsg.remove();
+            const input = document.getElementById('nickname');
+            input.classList.remove('is-invalid');
+            let toast = document.getElementById('nicknameToast');
+            if (toast) toast.remove();
+
+            // Check if nickname already exists for this strand and subject
+            fetch(`/api/leaderboard?subject=${subject}&strand=${encodeURIComponent(strand)}&nickname=${encodeURIComponent(nickname)}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.exists) {
+                        // Add is-invalid class to input
+                        input.classList.add('is-invalid');
+                        // Create backdrop
+                        const backdrop = document.createElement('div');
+                        backdrop.id = 'nicknameToastBackdrop';
+                        backdrop.className = 'fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center';
+                        // Create centered toast
+                        const toast = document.createElement('div');
+                        toast.id = 'nicknameToast';
+                        toast.className = 'bg-red-500 text-white font-bold px-4 py-3 rounded-xl shadow-2xl text-center text-base opacity-100 transition-opacity duration-700 max-w-xs w-full';
+                        toast.textContent = 'This nickname has already taken the exam for the selected strand. Please choose another nickname.';
+                        backdrop.appendChild(toast);
+                        document.body.appendChild(backdrop);
+                        input.focus();
+                        // Fade out and remove after 4 seconds
+                        setTimeout(() => {
+                            toast.style.opacity = '0';
+                            setTimeout(() => {
+                                if (backdrop) backdrop.remove();
+                            }, 700);
+                        }, 2500);
+                        return;
+                    }
+                    // Check if questions are loaded
+                    if (!questions || questions.length === 0) {
+                        // Show inline validation message below nickname input
+                        const input = document.getElementById('nickname');
+                        const msg = document.createElement('div');
+                        msg.id = 'nicknameValidationMsg';
+                        msg.className = 'mt-2 text-sm text-red-400 font-semibold';
+                        msg.textContent = 'Questions are still loading. Please wait a moment and try again.';
+                        input.parentNode.insertBefore(msg, input.nextSibling);
+                        input.focus();
+                        return;
+                    }
+                    document.getElementById('startFormContainer').classList.add('hidden');
+                    document.getElementById('quizContainer').classList.remove('hidden');
+                    // Start total time tracker
+                    totalTimerInterval = setInterval(() => {
+                        totalTime++;
+                    }, 1000);
+                    loadQuestion();
+                })
+                .catch(err => {
+                    // Show inline validation message below nickname input
+                    const input = document.getElementById('nickname');
+                    const msg = document.createElement('div');
+                    msg.id = 'nicknameValidationMsg';
+                    msg.className = 'mt-2 text-sm text-red-400 font-semibold';
+                    msg.textContent = 'Error checking nickname. Please try again.';
+                    input.parentNode.insertBefore(msg, input.nextSibling);
+                    input.focus();
+                });
         }
 
         function loadQuestion() {

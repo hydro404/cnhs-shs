@@ -32,7 +32,6 @@ class ExamModel {
           strand, 
           score, 
           time_taken,
-          created_at,
           date_taken
         FROM ${table}
       `;
