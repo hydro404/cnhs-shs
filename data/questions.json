@@ -1,0 +1,13 @@
+[
+  {
+    "id": 1,
+    "question": "What is media literacy?",
+    "options": [
+      "The ability to use social media",
+      "The ability to access, analyze, evaluate, and create media",
+      "The ability to read newspapers",
+      "The ability to watch television"
+    ],
+    "correct": 1
+  }
+]

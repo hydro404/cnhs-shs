@@ -6,7 +6,8 @@
     "start": "node server.js",
     "dev": "concurrently \"npm run build:css\" \"npm run serve\"",
     "serve": "nodemon server.js",
-    "build:css": "tailwindcss -i ./src/input.css -o ./public/css/styles.css --watch"
+    "build:css": "tailwindcss -i ./src/input.css -o ./public/css/styles.css --watch",
+    "setup-db": "node setup-database.js"
   },
   "keywords": [],
   "author": "",
@@ -16,7 +17,8 @@
     "dotenv": "^17.2.3",
     "ejs": "^3.1.10",
     "env": "^0.0.2",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "mysql2": "^3.16.1"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.22",

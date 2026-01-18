@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "question": "Which process is defined as the creation of new atomic nuclei from nucleons?",
+    "options": ["Beta decay", "Nucleosynthesis", "Dissociation", "Contraction"],
+    "correct": 1
+  },
+  {
+    "id": 2,
+    "question": "Which two elements were the primary products of Big Bang Nucleosynthesis?",
+    "options": ["Carbon and Oxygen", "Iron and Nickel", "Hydrogen and Helium", "Lithium and Beryllium"],
+    "correct": 2
+  },
+  {
+    "id": 3,
+    "question": "How long after the Big Bang did neutral atoms finally form as nuclei attracted electrons?",
+    "options": ["3 minutes", "A few seconds", "300,000 years", "1 billion years"],
+    "correct": 2
+  },
+  {
+    "id": 4,
+    "question": "What is a 'deuteron' composed of?",
+    "options": ["Two protons", "Two neutrons", "A proton and a neutron", "A proton and an electron"],
+    "correct": 2
+  },
+  {
+    "id": 5,
+    "question": "Elements from helium (He) to Iron (Fe) are primarily produced through which type of nucleosynthesis?",
+    "options": ["Big Bang Nucleosynthesis", "Stellar Nucleosynthesis", "Supernova Nucleosynthesis", "Neutron capture"],
+    "correct": 1
+  },
+  {
+    "id": 6,
+    "question": "What happens to a star when all of its hydrogen and helium are made into heavier elements?",
+    "options": ["It remains stable", "The star will collapse", "It turns into a giant planet", "It cools instantly"],
+    "correct": 1
+  },
+  {
+    "id": 7,
+    "question": "Elements beyond mass A=56 cannot be produced through fusion. Which process creates them?",
+    "options": ["Carbon burning", "Helium fusion", "Neutron-capture process", "Nuclear fission"],
+    "correct": 2
+  },
+  {
+    "id": 8,
+    "question": "In the neutron-capture process, how is an extra neutron converted into a proton?",
+    "options": ["Alpha decay", "Beta decay", "Gamma emission", "Nuclear contraction"],
+    "correct": 1
+  },
+  {
+    "id": 9,
+    "question": "What temperature can be reached during Supernova Nucleosynthesis?",
+    "options": ["1 million degrees Celsius", "100 billion degrees Celsius", "300,000 degrees Celsius", "10 billion degrees Celsius"],
+    "correct": 1
+  },
+  {
+    "id": 10,
+    "question": "What is the collective term for protons and neutrons found in the nucleus?",
+    "options": ["Electrons", "Nucleons", "Photons", "Isotopes"],
+    "correct": 1
+  }
+]

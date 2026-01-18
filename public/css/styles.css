@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap');
+
+body {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+/* You can add Tailwind directives if needed, but all styling for the exam start page should be done using Tailwind classes in your EJS/HTML. */
 *, ::before, ::after {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;

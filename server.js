@@ -1,20 +1,38 @@
 require('dotenv').config();
 const express = require("express");
 const path = require("path");
+const examController = require("./controllers/examController");
 
 const app = express();
 const PORT = 3000;
+
+// Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Set EJS
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
+// Static files
+app.use(express.static(path.join(__dirname, "public")));
+
+// Routes
 app.get("/", (req, res) => {
   res.render("home");
 });
 
-// Static files
-app.use(express.static(path.join(__dirname, "public")));
+// Exam routes
+// Exam directory route
+app.get("/exam", (req, res) => {
+  res.render("exam-directory");
+});
+
+app.get("/exam/:subject", examController.showExam);
+app.post("/exam/submit", examController.submitExam);
+app.get("/leaderboard/:subject", examController.showLeaderboard);
+app.get("/api/questions", examController.getQuestions);
+app.get("/api/leaderboard/:subject", examController.getLeaderboardJson);
 
 // === JSON DATA (NO DATABASE NEEDED) ===
 const subjects = {
@@ -28,7 +46,7 @@ const subjects = {
         items: [
           { name: "Physical Science Lesson 1.pdf", link: "./files/physci/Physical Science Lesson 1.pdf", type: "pdf" },
           { name: "Physical-Science-Activity-1.pdf", link: "./files/physci/Physical-Science-Activity-1.pdf", type: "pdf" },
-          { name: "Physical-Science-Review", link: "./physci/mini-quiz1", type: "link" },
+          // { name: "Physical-Science-Review", link: "./physci/mini-quiz1", type: "link" },
         ]
       },
       {

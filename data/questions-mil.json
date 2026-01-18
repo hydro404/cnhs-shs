@@ -1,0 +1,112 @@
+[
+  {
+    "id": 1,
+    "question": "What is media literacy?",
+    "options": [
+      "The ability to use social media",
+      "The ability to access, analyze, evaluate, and create media",
+      "The ability to read newspapers",
+      "The ability to watch television"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 2,
+    "question": "Which of the following is NOT a type of media?",
+    "options": [
+      "Television",
+      "Radio",
+      "Newspapers",
+      "Water"
+    ],
+    "correct": 3
+  },
+  {
+    "id": 3,
+    "question": "What is the primary purpose of media?",
+    "options": [
+      "To entertain only",
+      "To inform, educate, and entertain",
+      "To confuse people",
+      "To sell products only"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 4,
+    "question": "Which medium has the widest reach in the Philippines?",
+    "options": [
+      "Newspapers",
+      "Radio",
+      "Television",
+      "Internet"
+    ],
+    "correct": 2
+  },
+  {
+    "id": 5,
+    "question": "What does 'bias' in media mean?",
+    "options": [
+      "Being fair and balanced",
+      "Having a prejudiced or one-sided view",
+      "Using proper grammar",
+      "Having good production quality"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 6,
+    "question": "Which of the following is a credible source of information?",
+    "options": [
+      "Random social media posts",
+      "Peer-reviewed academic journals",
+      "Rumors from friends",
+      "Unverified websites"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 7,
+    "question": "What is 'fake news'?",
+    "options": [
+      "News from the past",
+      "False information presented as factual",
+      "News that is entertaining",
+      "News from other countries"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 8,
+    "question": "Which skill is essential for media literacy?",
+    "options": [
+      "Critical thinking",
+      "Sleeping",
+      "Cooking",
+      "Dancing"
+    ],
+    "correct": 0
+  },
+  {
+    "id": 9,
+    "question": "What is 'propaganda'?",
+    "options": [
+      "A type of music",
+      "Information designed to promote a particular viewpoint",
+      "A cooking method",
+      "A type of sport"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 10,
+    "question": "How can you verify information from an online source?",
+    "options": [
+      "Assume it's true if it looks professional",
+      "Check multiple reliable sources",
+      "Only believe what your friends share",
+      "Ignore it completely"
+    ],
+    "correct": 1
+  }
+]

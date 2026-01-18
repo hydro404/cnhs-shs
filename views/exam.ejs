@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M.I.L Online Exam</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+        .timer.warning {
+            animation: pulse 1s infinite;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800 font-[Space_Grotesk] p-2 sm:p-5">
+    <!-- Start Form Container -->
+    <div class="bg-[#181f27] rounded-2xl shadow-2xl p-4 sm:p-8 w-full max-w-md mx-auto" id="startFormContainer">
+        <div class="flex flex-col items-center mb-6 sm:mb-8">
+            <div class="mb-4">
+                <div class="flex items-center justify-center p-3 bg-teal-900 rounded-xl">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-teal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+                </div>
+            </div>
+            <h1 class="mb-1 text-2xl font-bold tracking-tight text-teal-400 sm:text-4xl"><%= title.split(' ')[0] %> <span class="text-white">Exam</span></h1>
+            <p class="text-base text-center text-gray-400 sm:text-lg"><%= title %></p>
+        </div>
+        <div>
+            <label class="block mb-2 font-medium text-white">Your Nickname</label>
+            <input id="nickname" type="text" placeholder="Enter your nickname" class="w-full mb-4 sm:mb-6 px-3 sm:px-4 py-2 sm:py-3 rounded-lg bg-[#232b36] text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-400 text-base sm:text-lg" />
+            <label class="block mb-2 font-medium text-white">Select Your Strand</label>
+            <div class="relative mb-6 sm:mb-8">
+                <select id="strandSelect" class="w-full px-4 py-3 rounded-lg bg-[#232b36] text-white font-bold text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-teal-400 appearance-none cursor-pointer">
+                    <option value="" disabled selected>Select a strand</option>
+                </select>
+                <span class="absolute transform -translate-y-1/2 pointer-events-none right-4 top-1/2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-teal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                </span>
+            </div>
+            <button class="w-full py-3 mb-3 text-base font-bold text-gray-900 transition bg-teal-400 sm:py-4 sm:mb-4 sm:text-lg rounded-xl hover:bg-teal-300" onclick="startExam()">Start Exam</button>
+            <button class="w-full py-3 sm:py-4 rounded-xl border border-teal-400 text-teal-400 font-bold text-base sm:text-lg hover:bg-[#232b36] transition" onclick="viewLeaderboard()">
+                <span class="inline-flex items-center"><svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 21h8M12 17v4M7 10l5-5 5 5M7 10v7a2 2 0 002 2h6a2 2 0 002-2v-7" /></svg>View Leaderboard</span>
+            </button>
+        </div>
+    </div>
+
+        <!-- Quiz Container -->
+        <div class="hidden bg-[#181f27] rounded-2xl shadow-2xl p-4 sm:p-8 w-full max-w-2xl mx-auto" id="quizContainer">
+            <!-- Top Header: Question count, percent, and circular timer -->
+            <div class="flex flex-col items-center justify-center gap-3 mb-4 sm:flex-row sm:justify-between sm:gap-2 sm:mb-3">
+                <span class="order-1 text-sm font-semibold text-white sm:text-sm sm:order-1" id="questionCount">Question 1 of 10</span>
+                <div class="relative order-2 w-14 h-14 sm:w-16 sm:h-16 sm:order-3">
+                    <svg viewBox="0 0 80 80" class="w-14 h-14 sm:w-16 sm:h-16">
+                        <!-- Track -->
+                        <circle cx="40" cy="40" r="34" stroke="#26313b" stroke-width="6" fill="none"></circle>
+                        <!-- Progress -->
+                        <circle id="ringProgress" cx="40" cy="40" r="34" stroke="#14b8a6" stroke-width="6" fill="none" stroke-linecap="round" transform="rotate(-90 40 40)"></circle>
+                    </svg>
+                    <div class="absolute inset-0 flex flex-col items-center justify-center">
+                        <div id="timerText" class="text-lg font-bold text-white sm:text-lg">30</div>
+                        <div class="text-[9px] text-gray-400 sm:text-[10px]">sec</div>
+                    </div>
+                </div>
+                <span class="order-3 text-sm font-semibold text-teal-400 sm:text-sm sm:order-2" id="progressPercent">0%</span>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="mb-4 sm:mb-6">
+                <div class="h-1 w-full bg-[#232b36] rounded-full overflow-hidden">
+                    <div id="progressBar" class="h-1 transition-all duration-300 bg-teal-400 rounded-full" style="width: 0%"></div>
+                </div>
+            </div>
+            
+            <div class="question-card">
+                <div class="mb-3 sm:mb-6">
+                    <span id="questionBadge" class="inline-block px-3 py-1 mb-2 text-xs font-semibold text-teal-400 bg-teal-900 rounded-full sm:px-3 sm:mb-4 sm:text-sm w-fit">Question 1</span>
+                </div>
+                <div class="mb-5 text-lg font-bold leading-snug text-white sm:mb-6 sm:text-3xl sm:leading-normal question-text" id="questionText"></div>
+                <div class="space-y-3 sm:space-y-3" id="optionsContainer"></div>
+            </div>
+            
+            <button class="hidden w-full py-3 text-base font-bold text-gray-900 transition bg-teal-400 btn sm:py-4 rounded-xl sm:text-lg hover:bg-teal-300" id="nextBtn" onclick="nextQuestion()" disabled>Next Question</button>
+        </div>
+
+        <!-- Result Container -->
+        <div class="hidden bg-[#181f27] rounded-2xl shadow-2xl p-4 sm:p-8 w-full max-w-2xl mx-auto" id="resultContainer">
+        <h1 class="mb-6 text-2xl font-bold text-white sm:mb-8 sm:text-4xl">🎉 Exam Completed!</h1>
+        
+        <div class="flex flex-col justify-around gap-4 mb-6 sm:flex-row sm:mb-8">
+            <div class="text-center">
+                <div class="text-3xl font-bold text-teal-400 sm:text-5xl" id="finalScore">0</div>
+                <div class="mt-1 text-gray-400 sm:mt-2">Score</div>
+            </div>
+            <div class="text-center">
+                <div class="text-3xl font-bold text-teal-400 sm:text-5xl" id="finalTime">0:00</div>
+                <div class="mt-1 text-gray-400 sm:mt-2">Time Taken</div>
+            </div>
+        </div>
+        
+        <button class="w-full py-3 mb-3 text-base font-bold text-gray-900 transition bg-teal-400 sm:py-4 sm:mb-4 sm:text-lg rounded-xl hover:bg-teal-300" onclick="viewLeaderboard()">View Leaderboard</button>
+        <button class="w-full py-3 sm:py-4 rounded-xl border border-gray-500 text-gray-400 font-bold text-base sm:text-lg hover:bg-[#232b36] transition" onclick="location.reload()">Take Again</button>
+    </div>
+
+    <script>
+        let questions = [];
+        let currentQuestion = 0;
+        let score = 0;
+        let selectedAnswer = null;
+        let nickname = '';
+        let strand = '';
+        let subject = '<%= subject %>';
+        let totalTime = 0;
+        let questionTime = 30; // seconds per question
+        let timerInterval = null;
+        let totalTimerInterval = null;
+
+        // Circular timer ring constants
+        const MAX_TIME = 30;
+        const RADIUS = 34; // matches SVG r
+        const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
+
+        // Fetch questions from server API on page load
+        async function initQuestions() {
+            try {
+                const response = await fetch(`/api/questions?subject=${subject}`);
+                const data = await response.json();
+                questions = data.questions;
+            } catch (error) {
+                console.error('Error fetching questions:', error);
+                alert('Error loading exam questions. Please refresh the page.');
+            }
+        }
+
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', initQuestions);
+
+        function setRingColor(remaining) {
+            const ring = document.getElementById('ringProgress');
+            if (!ring) return;
+            if (remaining <= 5) {
+                ring.setAttribute('stroke', '#ef4444'); // red-500
+            } else if (remaining <= 15) {
+                ring.setAttribute('stroke', '#f59e0b'); // amber-500
+            } else {
+                ring.setAttribute('stroke', '#14b8a6'); // teal-500
+            }
+        }
+
+        function setRingProgress(remaining) {
+            const ring = document.getElementById('ringProgress');
+            if (!ring) return;
+            ring.style.strokeDasharray = `${CIRCUMFERENCE}`;
+            const offset = CIRCUMFERENCE * (1 - remaining / MAX_TIME);
+            ring.style.strokeDashoffset = `${offset}`;
+        }
+
+
+
+        function startExam() {
+            nickname = document.getElementById('nickname').value.trim();
+            const strandSelect = document.getElementById('strandSelect');
+            strand = strandSelect.value;
+            
+            if (!nickname) {
+                alert('Please enter your nickname');
+                return;
+            }
+            
+            if (!strand) {
+                alert('Please select your strand');
+                return;
+            }
+
+            // Check if questions are loaded
+            if (!questions || questions.length === 0) {
+                alert('Questions are still loading. Please wait a moment and try again.');
+                return;
+            }
+            
+            document.getElementById('startFormContainer').classList.add('hidden');
+            document.getElementById('quizContainer').classList.remove('hidden');
+            // Start total time tracker
+            totalTimerInterval = setInterval(() => {
+                totalTime++;
+            }, 1000);
+            
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            if (currentQuestion >= questions.length) {
+                endExam();
+                return;
+            }
+            
+            const question = questions[currentQuestion];
+            
+            // Update progress
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('progressPercent').textContent = `${Math.round(progress)}%`;
+            document.getElementById('questionCount').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+            
+            // Update question badge
+            document.getElementById('questionBadge').textContent = `Question ${currentQuestion + 1}`;
+            
+            // Load question
+            document.getElementById('questionText').textContent = question.question;
+            
+            // Load options
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'flex items-center gap-3 bg-[#232b36] text-white p-3 sm:p-4 rounded-lg border-2 border-transparent hover:border-teal-400 hover:bg-[#27323d] active:bg-[#27323d] cursor-pointer transition-all duration-200 ease-out hover:-translate-y-0.5 active:scale-98';
+                
+                const label = document.createElement('span');
+                label.className = 'font-bold text-teal-400 w-7 h-7 sm:w-8 sm:h-8 text-sm sm:text-base flex items-center justify-center bg-[#1a202c] rounded flex-shrink-0';
+                label.textContent = String.fromCharCode(65 + index);
+                optionDiv.appendChild(label);
+                
+                const text = document.createElement('span');
+                text.className = 'text-sm sm:text-base leading-relaxed';
+                text.textContent = option;
+                optionDiv.appendChild(text);
+                
+                optionDiv.onclick = () => selectOption(index, optionDiv);
+                optionsContainer.appendChild(optionDiv);
+            });
+            
+            // Reset timer
+            questionTime = 30;
+            document.getElementById('timerText').textContent = questionTime;
+            setRingColor(questionTime);
+            setRingProgress(questionTime);
+            startTimer();
+            
+            // Reset selection
+            selectedAnswer = null;
+            document.getElementById('nextBtn').disabled = true;
+        }
+
+        function selectOption(index, element) {
+            // Clear previous selection styles
+            document.querySelectorAll('#optionsContainer > div').forEach(opt => {
+                opt.classList.remove('border-teal-400', 'bg-teal-900');
+            });
+
+            // Style selected
+            element.classList.add('border-teal-400', 'bg-teal-900');
+            selectedAnswer = index;
+
+            // Prevent double clicks
+            document.querySelectorAll('#optionsContainer > div').forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+
+            // Stop timer and advance shortly
+            clearInterval(timerInterval);
+            setTimeout(() => {
+                nextQuestion();
+            }, 400);
+        }
+
+        function startTimer() {
+            clearInterval(timerInterval);
+            
+            timerInterval = setInterval(() => {
+                questionTime--;
+                updateTimer();
+                
+                if (questionTime <= 10) {
+                    document.getElementById('timerText').classList.add('warning');
+                }
+                
+                if (questionTime <= 0) {
+                    clearInterval(timerInterval);
+                    autoNextQuestion();
+                }
+            }, 1000);
+        }
+
+        function updateTimer() {
+            document.getElementById('timerText').textContent = questionTime;
+            setRingColor(questionTime);
+            setRingProgress(questionTime);
+            
+            if (questionTime > 10) {
+                document.getElementById('timerText').classList.remove('warning');
+            }
+        }
+
+        function nextQuestion() {
+            clearInterval(timerInterval);
+            
+            // Check answer
+            if (selectedAnswer === questions[currentQuestion].correct) {
+                score++;
+            }
+            
+            currentQuestion++;
+            loadQuestion();
+        }
+
+        function autoNextQuestion() {
+            // Time's up - move to next without checking answer
+            currentQuestion++;
+            loadQuestion();
+        }
+
+        function endExam() {
+            clearInterval(timerInterval);
+            clearInterval(totalTimerInterval);
+            
+            document.getElementById('quizContainer').classList.add('hidden');
+            document.getElementById('resultContainer').classList.remove('hidden');
+            
+            // Display results
+            document.getElementById('finalScore').textContent = `${score}/${questions.length}`;
+            document.getElementById('finalTime').textContent = formatTime(totalTime);
+            
+            // Submit to server
+            submitExam();
+        }
+
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        async function submitExam() {
+            try {
+                const response = await fetch('/exam/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        nickname: nickname,
+                        strand: strand,
+                        score: score,
+                        timeTaken: totalTime,
+                        subject: subject
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (!data.success) {
+                    console.error('Error submitting exam:', data.message);
+                }
+            } catch (error) {
+                console.error('Error submitting exam:', error);
+            }
+        }
+
+        function viewLeaderboard() {
+            window.location.href = `/leaderboard/${subject}?user=${encodeURIComponent(nickname)}`;
+        }
+
+        // Render strand select options with icon indicators
+        function renderStrandSelect() {
+            const strandSelect = document.getElementById('strandSelect');
+            const strands = <%- JSON.stringify(strands) %>;
+            
+            const iconEmojis = {
+                'zap': '⚡',
+                'utensils': '🍴',
+                'book-open': '📖',
+                'monitor': '💻'
+            };
+
+            // Clear existing options except the placeholder
+            while (strandSelect.options.length > 1) {
+                strandSelect.remove(1);
+            }
+
+            // Add strand options with icons
+            strands.forEach(strand => {
+                const option = document.createElement('option');
+                const icon = iconEmojis[strand.icon] || '📌';
+                option.value = strand.name;
+                option.textContent = `${icon} ${strand.name}`;
+                strandSelect.appendChild(option);
+            });
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', renderStrandSelect);
+    </script>
+</body>
+</html>

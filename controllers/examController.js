@@ -1,0 +1,251 @@
+const ExamModel = require('../models/examModel');
+const fs = require('fs');
+const path = require('path');
+
+// Subject configuration
+const SUBJECTS = {
+  mil: {
+    title: 'Media and Information Summative Exam',
+    icon: 'book',
+    strands: [
+      { name: 'EIM - B', icon: 'zap' }, // lightning bolt for Electronic Information Management
+      { name: 'HE', icon: 'utensils' }  // utensils for Home Economics
+    ]
+  },
+  physci: {
+    title: 'Physical Science Summative Exam',
+    icon: 'atom',
+    strands: [
+      { name: 'GAS-A', icon: 'book-open' },   // book for General Academic Strand
+      { name: 'GAS-B', icon: 'book-open' },   // book for General Academic Strand
+      { name: 'CSS', icon: 'monitor' },       // computer for Computer Studies
+      { name: 'EIM', icon: 'zap' }            // lightning bolt for Electronic Information Management
+    ]
+  }
+};
+
+// Load questions from JSON file
+function loadQuestions(subject) {
+  if (!SUBJECTS[subject]) return [];
+  
+  const questionsPath = path.join(__dirname, `../data/questions-${subject}.json`);
+  try {
+    const data = fs.readFileSync(questionsPath, 'utf8');
+    return JSON.parse(data);
+  } catch (error) {
+    console.error(`Error loading ${subject} questions:`, error);
+    return [];
+  }
+}
+
+// Helper function to shuffle array
+function shuffleArray(array) {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
+// Helper function to randomize question and option order
+function randomizeQuestions(questions, count = 10) {
+  // Shuffle questions
+  const shuffledQuestions = shuffleArray(questions);
+  
+  // Return only the requested count, with randomized options
+  return shuffledQuestions.slice(0, count).map(q => {
+    // Create array with original indices
+    const optionsWithIndex = q.options.map((opt, idx) => ({ text: opt, originalIdx: idx }));
+    const shuffledOptions = shuffleArray(optionsWithIndex);
+    
+    // Find where the correct answer ended up
+    const correctIndex = shuffledOptions.findIndex(opt => opt.originalIdx === q.correct);
+    
+    return {
+      id: q.id,
+      question: q.question,
+      options: shuffledOptions.map(opt => opt.text),
+      correct: correctIndex
+    };
+  });
+}
+
+// Old M.I.L Exam Questions (kept for reference, removed from export)
+const milQuestions = [
+  {
+    question: "What does MIL stand for?",
+    options: [
+      "Media Internet Literacy",
+      "Media and Information Literacy",
+      "Modern Information Learning",
+      "Media Integration Literacy"
+    ],
+    correct: 1
+  },
+  {
+    question: "Which of the following is NOT a type of media?",
+    options: [
+      "Print Media",
+      "Broadcast Media",
+      "Digital Media",
+      "Personal Media"
+    ],
+    correct: 3
+  },
+  {
+    question: "What is the primary purpose of media literacy?",
+    options: [
+      "To create viral content",
+      "To critically analyze and evaluate media messages",
+      "To increase social media followers",
+      "To learn video editing"
+    ],
+    correct: 1
+  },
+  {
+    question: "Which technology is considered 'new media'?",
+    options: [
+      "Newspapers",
+      "Radio",
+      "Social Media Platforms",
+      "Television"
+    ],
+    correct: 2
+  },
+  {
+    question: "Information literacy helps you to:",
+    options: [
+      "Memorize all information",
+      "Identify, locate, evaluate, and effectively use information",
+      "Copy information without citing sources",
+      "Avoid using technology"
+    ],
+    correct: 1
+  }
+];
+
+const examController = {
+  // Display exam start page
+  showExam: (req, res) => {
+    const { subject } = req.params;
+    
+    if (!SUBJECTS[subject]) {
+      return res.status(404).send('Subject not found');
+    }
+
+    res.render('exam', { 
+      subject: subject,
+      title: SUBJECTS[subject].title,
+      strands: SUBJECTS[subject].strands
+    });
+  },
+
+  // Submit exam and save results
+  submitExam: async (req, res) => {
+    try {
+      const { nickname, strand, score, timeTaken, subject } = req.body;
+
+      // Validate input
+      if (!nickname || !strand || score === undefined || !timeTaken || !subject) {
+        return res.status(400).json({ 
+          success: false, 
+          message: 'Missing required fields' 
+        });
+      }
+
+      // Validate subject
+      if (!SUBJECTS[subject]) {
+        return res.status(400).json({ 
+          success: false, 
+          message: 'Invalid subject' 
+        });
+      }
+
+      // Validate strand based on subject
+      if (!SUBJECTS[subject].strands.map(s => s.name).includes(strand)) {
+        return res.status(400).json({ 
+          success: false, 
+          message: 'Invalid strand for this subject' 
+        });
+      }
+
+      // Save to database
+      await ExamModel.saveResult(nickname, strand, parseInt(score), parseInt(timeTaken), subject);
+
+      res.json({ 
+        success: true, 
+        message: 'Exam submitted successfully',
+        redirectUrl: '/leaderboard'
+      });
+    } catch (error) {
+      console.error('Error submitting exam:', error);
+      res.status(500).json({ 
+        success: false, 
+        message: 'Error submitting exam' 
+      });
+    }
+  },
+
+  // Display leaderboard
+  showLeaderboard: async (req, res) => {
+    const { subject } = req.params;
+
+    if (!SUBJECTS[subject]) {
+      return res.status(404).send('Subject not found');
+    }
+
+    try {
+      const leaderboard = await ExamModel.getLeaderboard(subject, null, 50);
+      const strands = SUBJECTS[subject].strands.map(s => s.name);
+      const selectedStrand = req.query.strand || '';
+      const userNickname = req.query.user || '';
+      res.render('leaderboard', {
+        leaderboard,
+        subject,
+        title: SUBJECTS[subject].title,
+        strands,
+        selectedStrand,
+        userNickname
+      });
+    } catch (error) {
+      console.error('Error fetching leaderboard:', error);
+      res.status(500).send('Error loading leaderboard');
+    }
+  },
+
+  // Get questions as JSON (for AJAX requests)
+  getQuestions: (req, res) => {
+    const { subject } = req.query;
+    
+    if (!subject || !SUBJECTS[subject]) {
+      return res.status(400).json({ 
+        success: false, 
+        message: 'Invalid or missing subject parameter' 
+      });
+    }
+
+    // Load and randomize questions for the subject
+    const allQuestions = loadQuestions(subject);
+    const randomizedQuestions = randomizeQuestions(allQuestions, 10);
+    res.json({ questions: randomizedQuestions });
+  },
+
+  // API: Get leaderboard as JSON
+  getLeaderboardJson: async (req, res) => {
+    const { subject } = req.params;
+    const strand = req.query.strand || null;
+    if (!SUBJECTS[subject]) {
+      return res.status(404).json({ success: false, message: 'Subject not found' });
+    }
+    try {
+      const leaderboard = await ExamModel.getLeaderboard(subject, strand, 50);
+      res.json({ success: true, leaderboard });
+    } catch (error) {
+      console.error('Error fetching leaderboard:', error);
+      res.status(500).json({ success: false, message: 'Error loading leaderboard' });
+    }
+  }
+};
+
+module.exports = examController;
