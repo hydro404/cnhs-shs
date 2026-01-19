@@ -305,20 +305,20 @@
                             
                             let dateStr = '';
                             if (entry.date_taken) {
-    const d = new Date(entry.date_taken);
-    // d.setHours(d.getHours() + 8); // add Asia/Singapore offset
+                                const d = new Date(entry.date_taken);
+                                // d.setHours(d.getHours() + 8); // add Asia/Singapore offset
 
-    const options = {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: '2-digit',
-        hour12: true
-    };
+                                const options = {
+                                    year: 'numeric',
+                                    month: 'long',
+                                    day: 'numeric',
+                                    hour: 'numeric',
+                                    minute: '2-digit',
+                                    hour12: true
+                                };
 
-    dateStr = d.toLocaleString('en-US', options);
-}
+                                dateStr = d.toLocaleString('en-US', options);
+                            }
 
                             html += `<tr class="rounded-xl ${rowClass} ${ringClass}"><td class="py-3 font-bold text-start"><span class="mr-1">${crown}</span>${rank}</td><td class="py-3 font-bold text-start">${entry.nickname}${isUser ? ' <span class="font-bold text-teal-400">(You)</span>' : ''}</td><td class="py-3 text-start"><span class="inline-block px-4 py-1 rounded-full font-semibold bg-[#1e293b] text-teal-400">${entry.strand}</span></td><td class="py-3 font-bold text-teal-400 text-start">${entry.score}/10</td><td class="py-3 font-bold text-start text-amber-400"><span>&#x23F1;</span> ${Math.floor(entry.time_taken / 60)}:${(entry.time_taken % 60).toString().padStart(2, '0')}</td><td class="py-3 font-bold text-gray-300 text-start">${dateStr}</td></tr>`;
                         });
