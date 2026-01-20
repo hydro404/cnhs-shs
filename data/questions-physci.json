@@ -1,62 +1,399 @@
 [
   {
     "id": 1,
-    "question": "Which process is defined as the creation of new atomic nuclei from nucleons?",
-    "options": ["Beta decay", "Nucleosynthesis", "Dissociation", "Contraction"],
-    "correct": 1
+    "question": "Which of the following evidences support Gamow’s hypothesis about the universe?",
+    "options": [
+      "A cosmic background radiation was detected.",
+      "The discovery of carbon as the first elements to be formed.",
+      "The galaxies are in steady-state.",
+      "Heavier elements like hydrogen and helium were first to be discovered."
+    ],
+    "correct": 0
   },
   {
     "id": 2,
-    "question": "Which two elements were the primary products of Big Bang Nucleosynthesis?",
-    "options": ["Carbon and Oxygen", "Iron and Nickel", "Hydrogen and Helium", "Lithium and Beryllium"],
+    "question": "Which of the following elements were first to form in the universe?",
+    "options": ["Na", "C", "H", "O"],
     "correct": 2
   },
   {
     "id": 3,
-    "question": "How long after the Big Bang did neutral atoms finally form as nuclei attracted electrons?",
-    "options": ["3 minutes", "A few seconds", "300,000 years", "1 billion years"],
-    "correct": 2
+    "question": "Which of the following types of nucleosynthesis states that after the expansion and cooling of the universe, nuclei started to form?",
+    "options": ["Big Bang", "stellar", "supernova", "none of these"],
+    "correct": 0
   },
   {
     "id": 4,
-    "question": "What is a 'deuteron' composed of?",
-    "options": ["Two protons", "Two neutrons", "A proton and a neutron", "A proton and an electron"],
-    "correct": 2
+    "question": "What is a reaction in which the nucleus emits radiation and transforms into a new nucleus?",
+    "options": ["Nuclear transmutation", "nuclear decay", "nuclear reaction", "nuclear energy"],
+    "correct": 1
   },
   {
     "id": 5,
-    "question": "Elements from helium (He) to Iron (Fe) are primarily produced through which type of nucleosynthesis?",
-    "options": ["Big Bang Nucleosynthesis", "Stellar Nucleosynthesis", "Supernova Nucleosynthesis", "Neutron capture"],
-    "correct": 1
-  },
-  {
-    "id": 6,
-    "question": "What happens to a star when all of its hydrogen and helium are made into heavier elements?",
-    "options": ["It remains stable", "The star will collapse", "It turns into a giant planet", "It cools instantly"],
-    "correct": 1
-  },
-  {
-    "id": 7,
-    "question": "Elements beyond mass A=56 cannot be produced through fusion. Which process creates them?",
-    "options": ["Carbon burning", "Helium fusion", "Neutron-capture process", "Nuclear fission"],
+    "question": "Complete the equation below: ²⁰Ne + ⁴He ➔ ___________ + γ",
+    "options": ["⁸Be", "⁴He", "²⁴Mg", "¹²C"],
     "correct": 2
   },
   {
+    "id": 6,
+    "question": "Complete the equation for the following reaction: ⁵⁷Fe + n ➔ ______________ + γ",
+    "options": ["⁵⁶Fe", "⁵⁷Fe", "⁵⁸Fe", "⁵⁹Fe"],
+    "correct": 2
+  },
+  {
+    "id": 7,
+    "question": "What nuclear reaction is shown below: (Alpha particle emission)",
+    "options": ["Alpha decay", "beta decay", "gamma decay", "none of these"],
+    "correct": 0
+  },
+  {
     "id": 8,
-    "question": "In the neutron-capture process, how is an extra neutron converted into a proton?",
-    "options": ["Alpha decay", "Beta decay", "Gamma emission", "Nuclear contraction"],
-    "correct": 1
+    "question": "Which of the following processes describes how elements heavier than iron form?",
+    "options": ["Big bang nucleosynthesis", "Stellar nucleosynthesis", "supernova nucleosynthesis", "universal nucleosynthesis"],
+    "correct": 2
   },
   {
     "id": 9,
-    "question": "What temperature can be reached during Supernova Nucleosynthesis?",
-    "options": ["1 million degrees Celsius", "100 billion degrees Celsius", "300,000 degrees Celsius", "10 billion degrees Celsius"],
-    "correct": 1
+    "question": "Which statement best describes supernova nucleosynthesis?",
+    "options": [
+      "It is a massive explosion of stars.",
+      "The explosion gives off massive amounts of energy.",
+      "Elements heavier than iron is formed during this process.",
+      "All of the above."
+    ],
+    "correct": 3
   },
   {
     "id": 10,
-    "question": "What is the collective term for protons and neutrons found in the nucleus?",
-    "options": ["Electrons", "Nucleons", "Photons", "Isotopes"],
+    "question": "Which of the following best describes the idea of Democritus about atoms?",
+    "options": [
+      "All matter is made of small indivisible and indestructible object called atoms.",
+      "Everything is made of earth, water, air and fire.",
+      "Atoms can be divided into tiny particles.",
+      "Matter is continuous and could be divided again without end."
+    ],
+    "correct": 0
+  },
+  {
+    "id": 11,
+    "question": "He believed that everything is made of air.",
+    "options": ["Anaximenes", "Heraclitus", "Thales", "Xenophanes"],
+    "correct": 0
+  },
+  {
+    "id": 12,
+    "question": "He proposed that air, fire, water and earth are primordial substances.",
+    "options": ["Heraclitus", "Empedocles", "Plato", "Democritus"],
     "correct": 1
+  },
+  {
+    "id": 13,
+    "question": "He was credited to have discovered arsenic.",
+    "options": ["Albertus Magnus", "Geber", "Paracelsus", "Newton"],
+    "correct": 0
+  },
+  {
+    "id": 14,
+    "question": "Which of the following describes the contribution of alchemy in the field of Chemistry?",
+    "options": [
+      "They arranged elements according to a shared characteristic.",
+      "They established the processes of distillation, fermentation, and sublimation.",
+      "Both statements in A and B is correct.",
+      "Both statements in A and B is incorrect."
+    ],
+    "correct": 2
+  },
+  {
+    "id": 15,
+    "question": "Which statement describes the contributions of alchemists to the science of chemistry?",
+    "options": [
+      "India invented steel and use fire to identify metals.",
+      "China invented gunpowder.",
+      "Egyptians made recipes for dyes and made artificial gemstones.",
+      "All of the above."
+    ],
+    "correct": 3
+  },
+  {
+    "id": 16,
+    "question": "Ernest Rutherford conducted which experiment in order to discover proton?",
+    "options": ["gold foil experiment", "cathode ray experiment", "nuclear experiment", "alpha beta experiment"],
+    "correct": 0
+  },
+  {
+    "id": 18,
+    "question": "James Chadwick discovered neutron in 1920. Which idea describes the discovery of this sub-atomic particle?",
+    "options": [
+      "He found out that the mass of the atom is concentrated outside the nucleus.",
+      "He found out that neutrons are positively charged particles.",
+      "He found out that there is a neutral massive particle in the center of the atom.",
+      "He found out that electrons are found at the center of the atom."
+    ],
+    "correct": 2
+  },
+  {
+    "id": 19,
+    "question": "Which of the following is Dalton’s idea about elements?",
+    "options": [
+      "All element is composed of atoms.",
+      "Atoms of the same element are different in size, mass and properties.",
+      "Different compounds made up of the same elements have the same number of atoms of each kind that combine.",
+      "The mass of one element that combines with another element is in ratios of fraction."
+    ],
+    "correct": 0
+  },
+  {
+    "id": 20,
+    "question": "Thomson conducted a cathode ray tube experiment. What sub-atomic particle did he discover?",
+    "options": ["Proton", "neutron", "electron", "all of these"],
+    "correct": 2
+  },
+  {
+    "id": 21,
+    "question": "How did John Dalton influence other scientists in the discovery of elements?",
+    "options": [
+      "Antoine Lavoisier proved that water is made up of two elements (Hydrogen and Oxygen).",
+      "The Law of Definite Proportions was published by Joseph Proust.",
+      "Antoine Lavoisier proposed the Law of Conservation of Mass.",
+      "All of the above."
+    ],
+    "correct": 3
+  },
+  {
+    "id": 22,
+    "question": "Water easily dissolves other polar molecules. Which statement tells the property of water?",
+    "options": ["Water is a polar molecule.", "Water is a non polar molecule.", "Water has ionic bond.", "Water has unique property."],
+    "correct": 0
+  },
+  {
+    "id": 23,
+    "question": "Coconut oil is insoluble in water. As a general rule, “like dissolves like”. What does the statement implies about coconut oil?",
+    "options": ["Coconut oil is nonpolar.", "Coconut oil is polar.", "Coconut oil is used for cooking.", "Coconut oil is essential."],
+    "correct": 0
+  },
+  {
+    "id": 24,
+    "question": "Vegetable oil can be blended with solvents like benzene as a substitute for petroleum-based fuel. Which of the following statement is TRUE?",
+    "options": [
+      "Vegetable oil has the same polarity as benzene.",
+      "Vegetable oil and benzene have different polarities.",
+      "Vegetable oil has the same polarity with water.",
+      "Vegetable oil has ionic bond."
+    ],
+    "correct": 0
+  },
+  {
+    "id": 25,
+    "question": "Which statement best explains the effect of intermolecular force (IMF) of attraction to vaporization?",
+    "options": [
+      "As IMF increases, vaporization also increases.",
+      "As IMF increases, vaporization decreases.",
+      "As IMF decreases, vaporization also decreases.",
+      "IMF has no effect to vaporization."
+    ],
+    "correct": 1
+  },
+  {
+    "id": 26,
+    "question": "A water droplet on the table seems to have a curve. Why?",
+    "options": [
+      "The greater the intermolecular force of attraction the higher the surface tension.",
+      "The greater the intermolecular force of attraction the lower the surface tension.",
+      "The lower the intermolecular force of attraction the lesser the effect on water.",
+      "The water reflects the container on the table."
+    ],
+    "correct": 0
+  },
+  {
+    "id": 27,
+    "question": "Three liquids vary in viscosity (A flows easily, C flows slowest). Why?",
+    "options": [
+      "IMF greatly affects the viscosity of the three liquids.",
+      "The greater is the IMF the higher is the viscosity.",
+      "The lesser the IMF the lower is the viscosity.",
+      "All of the above."
+    ],
+    "correct": 3
+  },
+  {
+    "id": 28,
+    "question": "Why do hydrocarbons play an important role in sports?",
+    "options": [
+      "Nylon is molded into gears, bearings, zippers and ropes.",
+      "Polyisoprene which constitutes rubber can be used as soles of athletic shoes.",
+      "Polysterene foam is used to make protective helmets.",
+      "All of the above."
+    ],
+    "correct": 3
+  },
+  {
+    "id": 29,
+    "question": "Why are polymers used in the field of medicine?",
+    "options": [
+      "Because it is flexible when used as wound dressing.",
+      "Because biopolymers can be used to replace diseased or damaged body parts.",
+      "Because many biological molecules are polymers.",
+      "All of the above."
+    ],
+    "correct": 3
+  },
+  {
+    "id": 30,
+    "question": "How are polymers used in construction and building furniture?",
+    "options": [
+      "Synthetic polymers are used as insulating materials.",
+      "Synthetic rubber is used for electrical installations in buildings.",
+      "Synthetic polymers are used as carpeting materials, plastic pipes, and fittings.",
+      "All of the above."
+    ],
+    "correct": 3
+  },
+  {
+    "id": 31,
+    "question": "Biomolecules are important to us. Why do we need to eat food rich in proteins?",
+    "options": [
+      "Because keratin is a structural protein found in hair, skin, and nails.",
+      "Because collagen is found in connective tissues.",
+      "Because myoglobin stores oxygen in muscles.",
+      "All of the above."
+    ],
+    "correct": 3
+  },
+  {
+    "id": 32,
+    "question": "Why are enzymes important during chemical reactions?",
+    "options": [
+      "Enzymes speed up chemical reactions.",
+      "Enzymes are components of the cell membrane.",
+      "Enzymes provide energy.",
+      "Enzymes defends the body against infection."
+    ],
+    "correct": 0
+  },
+  {
+    "id": 33,
+    "question": "With the use of X-ray spectroscopy, what did Henry Moseley discover?",
+    "options": [
+      "Atomic number determines the most properties of the atom.",
+      "Mass number is involve in determining the properties of atom.",
+      "The number of proton electron is responsible for the atomic mass.",
+      "All of the above"
+    ],
+    "correct": 0
+  },
+  {
+    "id": 34,
+    "question": "What is the similarity/difference between dipole-dipole interaction and hydrogen bonding?",
+    "options": [
+      "Dipole-dipole interaction act between polar molecules while hydrogen bonding act in nonpolar molecules.",
+      "Dipole-dipole interaction act between nonpolar molecules while hydrogen bonding act in polar molecules.",
+      "Both act between polar molecules.",
+      "Both act between nonpolar molecules."
+    ],
+    "correct": 2
+  },
+  {
+    "id": 35,
+    "question": "When sodium chloride and water are mixed, which statement best explains the intermolecular force of attraction?",
+    "options": [
+      "There is an attraction between ionic and polar molecules because sodium chloride has ions and water is polar.",
+      "There is dipole-dipole interaction because it involves polar molecules.",
+      "There is hydrogen bonding because of the hydrogen present in water molecule.",
+      "There is no intermolecular force of attraction present in the solution because it is nonpolar."
+    ],
+    "correct": 0
+  },
+  {
+    "id": 36,
+    "question": "Which of the following is Dalton’s contribution about the discovery of elements?",
+    "options": [
+      "All elements of matter are composed of extremely small particles called atoms.",
+      "Atoms of the same element are identical, having the same size, mass, and chemical properties.",
+      "Atoms of one element are different from the atoms of another element.",
+      "All of the above."
+    ],
+    "correct": 3
+  },
+  {
+    "id": 37,
+    "question": "_______ explained that everything came from water.",
+    "options": ["Aristotle", "Empedocles", "Leucippus", "Thales"],
+    "correct": 3
+  },
+  {
+    "id": 38,
+    "question": "If an atom has 14 neutrons and 14 protons, what is the mass number of the atom?",
+    "options": ["14", "10", "28", "32"],
+    "correct": 2
+  },
+  {
+    "id": 39,
+    "question": "In a neutral atom, the number of protons is always equal to the _________",
+    "options": ["Atomic charge", "Mass number", "no. of electrons", "no. of neutrons"],
+    "correct": 2
+  },
+  {
+    "id": 40,
+    "question": "For an aluminum isotope with 13 protons, 10 electrons, and 14 neutrons, the mass number will be equal to __________.",
+    "options": ["13", "23", "24", "27"],
+    "correct": 3
+  },
+  {
+    "id": 41,
+    "question": "Which of the following is a contribution of Ernest Rutherford about atoms?",
+    "options": [
+      "Atom has a positively charged core called the nucleus.",
+      "Atom has a negatively charged core called nucleus.",
+      "Protons are negatively charged particles.",
+      "Neutrons are positively charged particles."
+    ],
+    "correct": 0
+  },
+  {
+    "id": 44,
+    "question": "What is the difference between protons and electrons?",
+    "options": [
+      "Protons are positively charged while electrons are negative.",
+      "Protons are negatively charged while electrons are positive.",
+      "Protons have no charge while electrons are positive.",
+      "Electrons have no charge while protons are negative."
+    ],
+    "correct": 0
+  },
+  {
+    "id": 45,
+    "question": "What is the most probable IMF for: NH₃——NH₃",
+    "options": ["Dipole-dipole interaction", "Hydrogen bond", "ion dipole interaction", "dispersion force"],
+    "correct": 1
+  },
+  {
+    "id": 46,
+    "question": "What is the most probable IMF for: H₂——H₂",
+    "options": ["Dipole-dipole interaction", "Hydrogen bond", "ion dipole interaction", "dispersion force"],
+    "correct": 3
+  },
+  {
+    "id": 47,
+    "question": "What is the most probable IMF for: KI —— H₂O",
+    "options": ["Dipole-dipole interaction", "Hydrogen bond", "ion dipole interaction", "dispersion force"],
+    "correct": 2
+  },
+  {
+    "id": 48,
+    "question": "Identify the type of bond for F₂:",
+    "options": ["POLAR", "NONPOLAR", "IONIC"],
+    "correct": 1
+  },
+  {
+    "id": 49,
+    "question": "Identify the type of bond for CsBr:",
+    "options": ["POLAR", "NONPOLAR", "IONIC"],
+    "correct": 2
+  },
+  {
+    "id": 50,
+    "question": "Identify the type of bond for LiH:",
+    "options": ["POLAR", "NONPOLAR", "IONIC"],
+    "correct": 0
   }
 ]
