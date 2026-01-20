@@ -217,13 +217,19 @@ const examController = {
       const strands = SUBJECTS[subject].strands.map(s => s.name);
       const selectedStrand = req.query.strand || '';
       const userNickname = req.query.user || '';
+      
+      // Get total questions count for this subject
+      const allQuestions = loadQuestions(subject);
+      const totalQuestions = allQuestions.length;
+      
       res.render('leaderboard', {
         leaderboard,
         subject,
         title: SUBJECTS[subject].title,
         strands,
         selectedStrand,
-        userNickname
+        userNickname,
+        totalQuestions
       });
     } catch (error) {
       console.error('Error fetching leaderboard:', error);
@@ -257,7 +263,12 @@ const examController = {
     }
     try {
       const leaderboard = await ExamModel.getLeaderboard(subject, strand, 50);
-      res.json({ success: true, leaderboard });
+      
+      // Get total questions count for this subject
+      const allQuestions = loadQuestions(subject);
+      const totalQuestions = allQuestions.length;
+      
+      res.json({ success: true, leaderboard, totalQuestions });
     } catch (error) {
       console.error('Error fetching leaderboard:', error);
       res.status(500).json({ success: false, message: 'Error loading leaderboard' });
