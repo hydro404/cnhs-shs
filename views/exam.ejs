@@ -60,7 +60,7 @@
                         <circle id="ringProgress" cx="40" cy="40" r="34" stroke="#14b8a6" stroke-width="6" fill="none" stroke-linecap="round" transform="rotate(-90 40 40)"></circle>
                     </svg>
                     <div class="absolute inset-0 flex flex-col items-center justify-center">
-                        <div id="timerText" class="text-lg font-bold text-white sm:text-lg">30</div>
+                        <div id="timerText" class="text-lg font-bold text-white sm:text-lg">60</div>
                         <div class="text-[9px] text-gray-400 sm:text-[10px]">sec</div>
                     </div>
                 </div>
@@ -113,12 +113,12 @@
         let strand = '';
         let subject = '<%= subject %>';
         let totalTime = 0;
-        let questionTime = 30; // seconds per question
+        let questionTime = 60; // seconds per question
         let timerInterval = null;
         let totalTimerInterval = null;
 
         // Circular timer ring constants
-        const MAX_TIME = 30;
+        const MAX_TIME = 60;
         const RADIUS = 34; // matches SVG r
         const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
 
@@ -290,7 +290,7 @@
             });
             
             // Reset timer
-            questionTime = 30;
+            questionTime = 60;
             document.getElementById('timerText').textContent = questionTime;
             setRingColor(questionTime);
             setRingProgress(questionTime);
@@ -330,7 +330,7 @@
             clearInterval(timerInterval);
             setTimeout(() => {
                 nextQuestion();
-            }, 900);
+            }, 1500);
         }
 
         function startTimer() {
