@@ -71,10 +71,17 @@
                     }
                     
                     let dateStr = '';
-                    if (entry.date_taken) {
-                        const d = new Date(entry.date_taken);
-                        const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true };
-                        dateStr = d.toLocaleString('en-US', options);
+
+                    if (entry.date_taken) { 
+                        dateStr = new Date(entry.date_taken + 'Z').toLocaleString('en-US', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                            hour: 'numeric',
+                            minute: '2-digit',
+                            hour12: true,
+                            timeZone: 'Asia/Singapore',
+                        });
                     }
                 %>
                 <div class="<%= bgClass %> <%= borderClass %> rounded-xl p-4">
