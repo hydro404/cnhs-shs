@@ -24,6 +24,7 @@ router.get('/api/leaderboard', async (req, res) => {
 // Subject configuration
 const SUBJECTS = {
   mil: {
+    main:'Media and Information Literacy',
     title: 'Media and Information Summative Exam',
     icon: 'book',
     strands: [
@@ -32,6 +33,7 @@ const SUBJECTS = {
     ]
   },
   physci: {
+    main:'Physical Science',
     title: 'Physical Science Summative Exam',
     icon: 'atom',
     strands: [
@@ -152,6 +154,7 @@ const examController = {
     }
 
     res.render('exam', { 
+      main: SUBJECTS[subject].main,
       subject: subject,
       title: SUBJECTS[subject].title,
       strands: SUBJECTS[subject].strands
