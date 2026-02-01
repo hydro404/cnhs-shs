@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require("express");
 const path = require("path");
 const examController = require("./controllers/examController");
+const { title } = require('process');
 
 const app = express();
 const PORT = 3000;
@@ -67,6 +68,13 @@ const subjects = {
         desc: "Ideas of Ancient Greeks on Atoms and Elements",
         items: [
           { name: "Physical Science Lesson 3.pdf", link: "./files/physci/Physical Science Lesson 3.pdf", type: "pdf" },
+        ]
+      },
+      {
+        title: "Lesson 1 Quarter 4",
+        desc: "Chemical Reactions",
+        items: [
+          { name: "Physical Science Lesson 1 Q4.pdf", link: "./files/physci/Physical Science Lesson 1 Q4.pdf", type: "pdf" },
         ]
       }
       
