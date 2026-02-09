@@ -108,6 +108,13 @@ const subjects = {
           { name: "MIL-Activity-3.pdf", link: "./files/media/MIL Activity 3.pdf", type: "pdf" },
         ]
       },
+      {
+        title: "Lesson 1 - Finals",
+        desc: "Media Sources",
+        items: [
+          { name: "MIL Lesson 1 - Finals.pdf", link: "./files/media/MIL Lesson 1 - Finals.pdf", type: "pdf" },
+        ]
+      },
       
     ]
   }
