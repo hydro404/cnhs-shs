@@ -76,6 +76,20 @@ const subjects = {
         items: [
           { name: "Physical Science Lesson 1 Q4.pdf", link: "./files/physci/Physical Science Lesson 1 Q4.pdf", type: "pdf" },
         ]
+      },
+      {
+        title: "Lesson 2 Quarter 4",
+        desc: "Chemical Changes",
+        items: [
+          { name: "Physical Science Lesson 2 Q4.pdf", link: "./files/physci/Physical Science Lesson 2 Q4.pdf", type: "pdf" },
+        ]
+      },
+      {
+        title: "Lesson 3 Quarter 4",
+        desc: "Mole Relationships",
+        items: [
+          { name: "Physical Science Lesson 3 Q4.pdf", link: "./files/physci/Physical Science Lesson 3 Q4.pdf", type: "pdf" },
+        ]
       }
       
     ]
