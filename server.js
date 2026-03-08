@@ -90,6 +90,13 @@ const subjects = {
         items: [
           { name: "Physical Science Lesson 3 Q4.pdf", link: "./files/physci/Physical Science Lesson 3 Q4.pdf", type: "pdf" },
         ]
+      },
+      {
+        title: "Lesson 4 Quarter 4",
+        desc: "Different Sources of Energy",
+        items: [
+          { name: "Physical Science Lesson 4 Q4.pdf", link: "./files/physci/Physical Science Lesson 4 Q4.pdf", type: "pdf" },
+        ]
       }
       
     ]
