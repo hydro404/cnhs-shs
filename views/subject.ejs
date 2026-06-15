@@ -10,7 +10,18 @@
   <link rel="icon" type="image/png" href="/favicon.png">
 </head>
 
-<body class="flex items-center justify-center min-h-screen p-4 bg-slate-100 sm:p-6">
+<body class="flex flex-col items-center justify-center min-h-screen p-4 bg-slate-100 sm:p-6">
+
+  <!-- Go Back Button -->
+  <div class="w-full max-w-3xl mb-4 flex justify-start">
+    <a href="/" class="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-semibold text-slate-600 transition-all bg-white border border-slate-200 shadow-sm rounded-xl hover:text-slate-900 hover:bg-slate-50 active:scale-95">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
+      </svg>
+      Back to Home
+    </a>
+  </div>
+
   <div class="w-full max-w-3xl overflow-hidden bg-white shadow-xl rounded-2xl sm:rounded-3xl">
 
     <!-- Header -->
@@ -83,7 +94,7 @@
 
     <!-- Footer -->
     <div class="py-4 text-xs text-center border-t sm:py-5 sm:text-sm text-slate-500">
-      <b><%= data.files.length %> lessons available</b>
+      <b><%= data.files.length %> <%= data.files.length === 1 ? 'lesson ' : 'lessons ' %>available</b>
     </div>
 
   </div>

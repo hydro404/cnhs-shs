@@ -1,8 +1,8 @@
-require('dotenv').config();
+require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const examController = require("./controllers/examController");
-const { title } = require('process');
+const { title } = require("process");
 
 const app = express();
 const PORT = 3000;
@@ -42,188 +42,299 @@ if (examController.router) {
 
 // === JSON DATA (NO DATABASE NEEDED) ===
 const subjects = {
-  physci: {
-    title: "Physical Science Materials",
+  // physci: {
+  //   title: "Physical Science Materials",
+  //   description: "Click to download lesson modules and activities.",
+  //   files: [
+  //     {
+  //       title: "Lesson 1",
+  //       desc: "The Formation of the Elements during the Big Bang and Stellar Evolution",
+  //       items: [
+  //         { name: "Physical Science Lesson 1.pdf", link: "./files/physci/Physical Science Lesson 1.pdf", type: "pdf" },
+  //         { name: "Physical-Science-Activity-1.pdf", link: "./files/physci/Physical-Science-Activity-1.pdf", type: "pdf" },
+  //         // { name: "Physical-Science-Review", link: "./physci/mini-quiz1", type: "link" },
+  //       ]
+  //     },
+  //     {
+  //       title: "Lesson 2",
+  //       desc: "Atomic Number and the Synthesis of New Elements",
+  //       items: [
+  //         { name: "Physical Science Lesson 2.pdf", link: "./files/physci/Physical Science Lesson 2.pdf", type: "pdf" },
+  //         { name: "Physical-Science-Activity-2.pdf", link: "./files/physci/Physical-Science-Activity-2.pdf", type: "pdf" },
+  //       ]
+  //     },
+  //     {
+  //       title: "Lesson 3",
+  //       desc: "Ideas of Ancient Greeks on Atoms and Elements",
+  //       items: [
+  //         { name: "Physical Science Lesson 3.pdf", link: "./files/physci/Physical Science Lesson 3.pdf", type: "pdf" },
+  //       ]
+  //     },
+  //     {
+  //       title: "Lesson 1 Quarter 4",
+  //       desc: "Chemical Reactions",
+  //       items: [
+  //         { name: "Physical Science Lesson 1 Q4.pdf", link: "./files/physci/Physical Science Lesson 1 Q4.pdf", type: "pdf" },
+  //       ]
+  //     },
+  //     {
+  //       title: "Lesson 2 Quarter 4",
+  //       desc: "Chemical Changes",
+  //       items: [
+  //         { name: "Physical Science Lesson 2 Q4.pdf", link: "./files/physci/Physical Science Lesson 2 Q4.pdf", type: "pdf" },
+  //       ]
+  //     },
+  //     {
+  //       title: "Lesson 3 Quarter 4",
+  //       desc: "Mole Relationships",
+  //       items: [
+  //         { name: "Physical Science Lesson 3 Q4.pdf", link: "./files/physci/Physical Science Lesson 3 Q4.pdf", type: "pdf" },
+  //       ]
+  //     },
+  //     {
+  //       title: "Lesson 4 Quarter 4",
+  //       desc: "Different Sources of Energy",
+  //       items: [
+  //         { name: "Physical Science Lesson 4 Q4.pdf", link: "./files/physci/Physical Science Lesson 4 Q4.pdf", type: "pdf" },
+  //       ]
+  //     }
+
+  //   ]
+  // },
+  // mil:{
+  //   title: "Media and Information Literacy Materials",
+  //   description: "Click to download lesson modules and activities.",
+  //   files: [
+  //     {
+  //       title: "Lesson 1",
+  //       desc: "Introduction to Media and Information Literacy",
+  //       items: [
+  //         { name: "MIL Lesson 1.pdf", link: "./files/media/MIL Lesson 1.pdf", type: "pdf" },
+  //         { name: "MIL-Activity-1.png", link: "./files/media/MIL Activity 1.png", type: "png" },
+  //       ]
+  //     },
+  //     {
+  //       title: "Lesson 2",
+  //       desc: "Media, Technology, and Information Literacy",
+  //       items: [
+  //         { name: "MIL Lesson 2.pdf", link: "./files/media/MIL Lesson 2.pdf", type: "pdf" },
+  //         { name: "MIL-Activity-2.pdf", link: "./files/media/MIL Activity 2.pdf", type: "pdf" },
+  //       ]
+  //     },
+  //     {
+  //       title: "Lesson 3",
+  //       desc: "The Evolution of Traditional to New Media",
+  //       items: [
+  //         { name: "MIL Lesson 3.pdf", link: "./files/media/MIL Lesson 3.pdf", type: "pdf" },
+  //         { name: "MIL-Activity-3.pdf", link: "./files/media/MIL Activity 3.pdf", type: "pdf" },
+  //       ]
+  //     },
+  //     {
+  //       title: "Lesson 1 - Finals",
+  //       desc: "Media Sources",
+  //       items: [
+  //         { name: "MIL Lesson 1 - Finals.pdf", link: "./files/media/MIL Lesson 1 - Finals.pdf", type: "pdf" },
+  //       ]
+  //     },
+
+  //   ]
+  // }
+  emtech: {
+    title: "Empowerment Technologies 12 Materials",
     description: "Click to download lesson modules and activities.",
     files: [
       {
         title: "Lesson 1",
-        desc: "The Formation of the Elements during the Big Bang and Stellar Evolution",
+        desc: "Introduction to ICT",
         items: [
-          { name: "Physical Science Lesson 1.pdf", link: "./files/physci/Physical Science Lesson 1.pdf", type: "pdf" },
-          { name: "Physical-Science-Activity-1.pdf", link: "./files/physci/Physical-Science-Activity-1.pdf", type: "pdf" },
-          // { name: "Physical-Science-Review", link: "./physci/mini-quiz1", type: "link" },
-        ]
+          {
+            name: "EmTech Lesson 1.pdf",
+            link: "./files/emtech/1-ICT and its Current State.pdf",
+            type: "pdf",
+          },
+          // {
+          //   name: "Empowerment Technologies Activity 1.pdf",
+          //   link: "./files/emtech/Empowerment Technologies Activity 1.pdf",
+          //   type: "pdf",
+          // },
+        ],
       },
-      {
-        title: "Lesson 2",
-        desc: "Atomic Number and the Synthesis of New Elements",
-        items: [
-          { name: "Physical Science Lesson 2.pdf", link: "./files/physci/Physical Science Lesson 2.pdf", type: "pdf" },
-          { name: "Physical-Science-Activity-2.pdf", link: "./files/physci/Physical-Science-Activity-2.pdf", type: "pdf" },
-        ]
-      },
-      {
-        title: "Lesson 3",
-        desc: "Ideas of Ancient Greeks on Atoms and Elements",
-        items: [
-          { name: "Physical Science Lesson 3.pdf", link: "./files/physci/Physical Science Lesson 3.pdf", type: "pdf" },
-        ]
-      },
-      {
-        title: "Lesson 1 Quarter 4",
-        desc: "Chemical Reactions",
-        items: [
-          { name: "Physical Science Lesson 1 Q4.pdf", link: "./files/physci/Physical Science Lesson 1 Q4.pdf", type: "pdf" },
-        ]
-      },
-      {
-        title: "Lesson 2 Quarter 4",
-        desc: "Chemical Changes",
-        items: [
-          { name: "Physical Science Lesson 2 Q4.pdf", link: "./files/physci/Physical Science Lesson 2 Q4.pdf", type: "pdf" },
-        ]
-      },
-      {
-        title: "Lesson 3 Quarter 4",
-        desc: "Mole Relationships",
-        items: [
-          { name: "Physical Science Lesson 3 Q4.pdf", link: "./files/physci/Physical Science Lesson 3 Q4.pdf", type: "pdf" },
-        ]
-      },
-      {
-        title: "Lesson 4 Quarter 4",
-        desc: "Different Sources of Energy",
-        items: [
-          { name: "Physical Science Lesson 4 Q4.pdf", link: "./files/physci/Physical Science Lesson 4 Q4.pdf", type: "pdf" },
-        ]
-      }
-      
-    ]
+    ],
   },
-  mil:{
-    title: "Media and Information Literacy Materials",
+
+  gensci:{
+    title: "General Science 11 Materials",
     description: "Click to download lesson modules and activities.",
     files: [
       {
         title: "Lesson 1",
-        desc: "Introduction to Media and Information Literacy",
+        desc: "Physics in Daily Life",
         items: [
-          { name: "MIL Lesson 1.pdf", link: "./files/media/MIL Lesson 1.pdf", type: "pdf" },
-          { name: "MIL-Activity-1.png", link: "./files/media/MIL Activity 1.png", type: "png" },
-        ]
+          {
+            name: "General Science Lesson 1.pdf",
+            link: "./files/gensci/GenSci-W1-1.pdf",
+            type: "pdf",
+          },
+        ],
       },
-      {
-        title: "Lesson 2",
-        desc: "Media, Technology, and Information Literacy",
-        items: [
-          { name: "MIL Lesson 2.pdf", link: "./files/media/MIL Lesson 2.pdf", type: "pdf" },
-          { name: "MIL-Activity-2.pdf", link: "./files/media/MIL Activity 2.pdf", type: "pdf" },
-        ]
-      },
-      {
-        title: "Lesson 3",
-        desc: "The Evolution of Traditional to New Media",
-        items: [
-          { name: "MIL Lesson 3.pdf", link: "./files/media/MIL Lesson 3.pdf", type: "pdf" },
-          { name: "MIL-Activity-3.pdf", link: "./files/media/MIL Activity 3.pdf", type: "pdf" },
-        ]
-      },
-      {
-        title: "Lesson 1 - Finals",
-        desc: "Media Sources",
-        items: [
-          { name: "MIL Lesson 1 - Finals.pdf", link: "./files/media/MIL Lesson 1 - Finals.pdf", type: "pdf" },
-        ]
-      },
-      
-    ]
+    ],
   }
 };
-
-
 
 // === QUIZ DATA ===
 const quizData = {
   physci: {
     miniQuiz1: [
       {
-        question: "Which process is defined as the creation of new atomic nuclei from nucleons?",
-        options: ["Beta decay", "Nucleosynthesis", "Dissociation", "Contraction"],
-        correct: 1
+        question:
+          "Which process is defined as the creation of new atomic nuclei from nucleons?",
+        options: [
+          "Beta decay",
+          "Nucleosynthesis",
+          "Dissociation",
+          "Contraction",
+        ],
+        correct: 1,
       },
       {
-        question: "Which two elements were the primary products of Big Bang Nucleosynthesis?",
-        options: ["Carbon and Oxygen", "Iron and Nickel", "Hydrogen and Helium", "Lithium and Beryllium"],
-        correct: 2
+        question:
+          "Which two elements were the primary products of Big Bang Nucleosynthesis?",
+        options: [
+          "Carbon and Oxygen",
+          "Iron and Nickel",
+          "Hydrogen and Helium",
+          "Lithium and Beryllium",
+        ],
+        correct: 2,
       },
       {
-        question: "How long after the Big Bang did neutral atoms finally form as nuclei attracted electrons?",
-        options: ["3 minutes", "A few seconds", "300,000 years", "1 billion years"],
-        correct: 2
+        question:
+          "How long after the Big Bang did neutral atoms finally form as nuclei attracted electrons?",
+        options: [
+          "3 minutes",
+          "A few seconds",
+          "300,000 years",
+          "1 billion years",
+        ],
+        correct: 2,
       },
       {
-        question: "What is a \"deuteron\" composed of?",
-        options: ["Two protons", "Two neutrons", "A proton and a neutron", "A proton and an electron"],
-        correct: 2
+        question: 'What is a "deuteron" composed of?',
+        options: [
+          "Two protons",
+          "Two neutrons",
+          "A proton and a neutron",
+          "A proton and an electron",
+        ],
+        correct: 2,
       },
       {
-        question: "Elements from helium (He) to Iron (Fe) are primarily produced through which type of nucleosynthesis?",
-        options: ["Big Bang Nucleosynthesis", "Stellar Nucleosynthesis", "Supernova Nucleosynthesis", "Neutron capture"],
-        correct: 1
+        question:
+          "Elements from helium (He) to Iron (Fe) are primarily produced through which type of nucleosynthesis?",
+        options: [
+          "Big Bang Nucleosynthesis",
+          "Stellar Nucleosynthesis",
+          "Supernova Nucleosynthesis",
+          "Neutron capture",
+        ],
+        correct: 1,
       },
       {
-        question: "What happens to a star when all of its hydrogen and helium are made into heavier elements?",
-        options: ["It remains stable", "The star will collapse", "It turns into a giant planet", "It cools instantly"],
-        correct: 1
+        question:
+          "What happens to a star when all of its hydrogen and helium are made into heavier elements?",
+        options: [
+          "It remains stable",
+          "The star will collapse",
+          "It turns into a giant planet",
+          "It cools instantly",
+        ],
+        correct: 1,
       },
       {
-        question: "Elements beyond mass $A=56$ cannot be produced through fusion. Which process creates them?",
-        options: ["Carbon burning", "Helium fusion", "Neutron-capture process", "Nuclear fission"],
-        correct: 2
+        question:
+          "Elements beyond mass $A=56$ cannot be produced through fusion. Which process creates them?",
+        options: [
+          "Carbon burning",
+          "Helium fusion",
+          "Neutron-capture process",
+          "Nuclear fission",
+        ],
+        correct: 2,
       },
       {
-        question: "In the neutron-capture process, how is an extra neutron converted into a proton?",
-        options: ["Alpha decay", "Beta decay", "Gamma emission", "Nuclear contraction"],
-        correct: 1
+        question:
+          "In the neutron-capture process, how is an extra neutron converted into a proton?",
+        options: [
+          "Alpha decay",
+          "Beta decay",
+          "Gamma emission",
+          "Nuclear contraction",
+        ],
+        correct: 1,
       },
       {
-        question: "What temperature can be reached during Supernova Nucleosynthesis?",
-        options: ["1 million degrees Celsius", "100 billion degrees Celsius", "300,000 degrees Celsius", "10 billion degrees Celsius"],
-        correct: 1
+        question:
+          "What temperature can be reached during Supernova Nucleosynthesis?",
+        options: [
+          "1 million degrees Celsius",
+          "100 billion degrees Celsius",
+          "300,000 degrees Celsius",
+          "10 billion degrees Celsius",
+        ],
+        correct: 1,
       },
       {
-        question: "According to the fusion equations, what is the product of the reaction: $^{20}Ne + {}^{4}He$?",
+        question:
+          "According to the fusion equations, what is the product of the reaction: $^{20}Ne + {}^{4}He$?",
         options: ["$^{12}C$", "$^{16}O$", "$^{24}Mg$", "$^{56}Fe$"],
-        correct: 2
+        correct: 2,
       },
       {
-        question: "What is the collective term for protons and neutrons found in the nucleus?",
+        question:
+          "What is the collective term for protons and neutrons found in the nucleus?",
         options: ["Electrons", "Nucleons", "Photons", "Isotopes"],
-        correct: 1
+        correct: 1,
       },
       {
         question: "What is the product of the equation: $n + p \\rightarrow$?",
-        options: ["$He + \\gamma$", "$d + \\gamma$", "$Be + \\gamma$", "$C + \\gamma$"],
-        correct: 1
+        options: [
+          "$He + \\gamma$",
+          "$d + \\gamma$",
+          "$Be + \\gamma$",
+          "$C + \\gamma$",
+        ],
+        correct: 1,
       },
       {
-        question: "The fusion of two Carbon-12 nuclei ($^{12}C + {}^{12}C$) results in which element?",
+        question:
+          "The fusion of two Carbon-12 nuclei ($^{12}C + {}^{12}C$) results in which element?",
         options: ["Helium", "Magnesium", "Iron", "Oxygen"],
-        correct: 1
+        correct: 1,
       },
       {
-        question: "Why is $^{8}Be$ considered unstable in the helium fusion process?",
-        options: ["It is too heavy", "It breaks apart as rapidly as it forms", "It only forms in cold stars", "It is a neutral atom"],
-        correct: 1
+        question:
+          "Why is $^{8}Be$ considered unstable in the helium fusion process?",
+        options: [
+          "It is too heavy",
+          "It breaks apart as rapidly as it forms",
+          "It only forms in cold stars",
+          "It is a neutral atom",
+        ],
+        correct: 1,
       },
       {
-        question: "Which range of elements is formed during Supernova Nucleosynthesis?",
-        options: ["Hydrogen to Helium", "Helium to Iron", "Iron to Uranium", "Carbon to Oxygen"],
-        correct: 2
-      }
-    ]
-  }
+        question:
+          "Which range of elements is formed during Supernova Nucleosynthesis?",
+        options: [
+          "Hydrogen to Helium",
+          "Helium to Iron",
+          "Iron to Uranium",
+          "Carbon to Oxygen",
+        ],
+        correct: 2,
+      },
+    ],
+  },
 };
 
 // === ROUTES ===
@@ -232,22 +343,22 @@ app.get("/physci/mini-quiz1", (req, res) => {
     title: "Physical Science - Mini Quiz 1",
     subject: "physci",
     quizId: "miniQuiz1",
-    questions: quizData.physci.miniQuiz1
+    questions: quizData.physci.miniQuiz1,
   });
 });
 
 app.get("/movies/:id", (req, res) => {
   const movieId = req.params.id;
-  res.render("movies", { 
+  res.render("movies", {
     movieId,
-    tmdbApiKey: process.env.TMDB_API_KEY || ''
+    tmdbApiKey: process.env.TMDB_API_KEY || "",
   });
 });
 
 app.get("/movies", (req, res) => {
-  res.render("movies", { 
+  res.render("movies", {
     movieId: null,
-    tmdbApiKey: process.env.TMDB_API_KEY || ''
+    tmdbApiKey: process.env.TMDB_API_KEY || "",
   });
 });
 
@@ -263,5 +374,5 @@ app.get("/:subject", (req, res) => {
 });
 
 app.listen(PORT, () =>
-  console.log(`Server running at http://localhost:${PORT}`)
+  console.log(`Server running at http://localhost:${PORT}`),
 );

@@ -3,83 +3,134 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Select Subject</title>
+  <title>Select Subject - Camalig National High School</title>
   <link rel="stylesheet" href="/css/styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="icon" type="image/png" href="/favicon.png">
 </head>
 
-<body class="flex items-center justify-center min-h-screen p-6 bg-slate-100">
+<body class="flex flex-col min-h-screen bg-slate-100 font-sans antialiased text-slate-800">
 
-  <div class="w-full max-w-4xl">
-    <h1 class="mb-6 text-2xl font-bold text-center sm:text-3xl text-slate-900">
-      Select a Subject
-    </h1>
-
-    <!-- CARD GRID -->
-    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6">
-
-      <!-- PhysSci Card -->
-      <a href="/physci"
-         class="flex items-start gap-4 p-5 transition-all duration-300 bg-white border shadow-md sm:p-6 hover:shadow-xl hover:-translate-y-1 rounded-2xl border-slate-200">
-        
-        <div class="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-blue-500/10">
-          <span class="text-2xl text-blue-500">🔬</span>
+  <!-- Navbar -->
+  <nav class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20">
+        <div class="flex items-center gap-3">
+          <div class="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-blue-600 text-white font-bold text-lg sm:text-xl shadow-md">
+            🏫
+          </div>
+          <div>
+            <span class="text-sm font-extrabold text-slate-900 block sm:hidden uppercase tracking-wider">CNHS SHS</span>
+            <span class="text-lg font-extrabold text-slate-900 hidden sm:block tracking-tight">Camalig National High School</span>
+            <span class="text-[10px] sm:text-xs font-semibold text-slate-500 block">Senior High School Portal</span>
+          </div>
         </div>
-
-        <div class="flex-1">
-          <h2 class="mb-1 text-lg font-semibold sm:text-xl text-slate-900">
-            Physical Science
-          </h2>
-          <p class="text-sm leading-snug text-slate-500">
-            Modules, activities, and worksheets for Physical Science.
-          </p>
-        </div>
-      </a>
-
-      <!-- MIL Card -->
-      <a href="/mil"
-         class="flex items-start gap-4 p-5 transition-all duration-300 bg-white border shadow-md sm:p-6 hover:shadow-xl hover:-translate-y-1 rounded-2xl border-slate-200">
-        
-        <div class="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-purple-500/10">
-          <span class="text-2xl text-purple-500">💡</span>
-        </div>
-
-        <div class="flex-1">
-          <h2 class="mb-1 text-lg font-semibold sm:text-xl text-slate-900">
-            Media & Information Literacy
-          </h2>
-          <p class="text-sm leading-snug text-slate-500">
-            Learn about media, information literacy, and digital citizenship.
-          </p>
-        </div>
-      </a>
-
-      <!-- Add More Subjects Here -->
-      <% if (typeof extraSubjects !== "undefined") { %>
-        <% extraSubjects.forEach(subj => { %>
-          <a href="/<%= subj.link %>"
-             class="flex items-start gap-4 p-5 transition-all duration-300 bg-white border shadow-md sm:p-6 hover:shadow-xl hover:-translate-y-1 rounded-2xl border-slate-200">
-            
-            <div class="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-green-500/10">
-              <span class="text-2xl text-green-500"><%= subj.icon %></span>
-            </div>
-
-            <div class="flex-1">
-              <h2 class="mb-1 text-lg font-semibold sm:text-xl text-slate-900">
-                <%= subj.title %>
-              </h2>
-              <p class="text-sm leading-snug text-slate-500">
-                <%= subj.description %>
-              </p>
-            </div>
+        <!-- <div class="flex items-center gap-2 sm:gap-3">
+          <a href="/exam" class="inline-flex items-center gap-1.5 px-3 py-2 text-xs sm:text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 active:scale-95 transition-all rounded-xl shadow-sm hover:shadow-md">
+            <span>📝</span> <span>Take Exam</span>
           </a>
-        <% }) %>
-      <% } %>
+        </div> -->
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="flex-grow flex items-center justify-center p-4 sm:p-6 md:p-8">
+    <div class="w-full max-w-4xl py-6">
+      
+      <div class="text-center mb-8 sm:mb-12">
+        <h1 class="text-2xl font-extrabold text-slate-900 tracking-tight sm:text-4xl">
+          Select a Subject
+        </h1>
+        <p class="mt-2 text-xs sm:text-sm text-slate-500 max-w-md mx-auto">
+          Access your digital learning companion. Choose a subject below to download reviewers, modules, and activities.
+        </p>
+      </div>
+
+      <!-- CARD GRID -->
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6">
+        <!-- Empowerment Technologies Card -->
+        <a href="/emtech"
+           class="flex items-start gap-4 p-5 transition-all duration-300 bg-white border shadow-md sm:p-6 hover:shadow-xl hover:-translate-y-1 rounded-2xl border-slate-200">
+          
+          <div class="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-green-500/10">
+            <span class="text-2xl text-green-500">💻</span>
+          </div>
+  
+          <div class="flex-1">
+            <h2 class="mb-1 text-lg font-semibold sm:text-xl text-slate-900">
+              Empowerment Technologies 12
+            </h2>
+            <p class="text-sm leading-snug text-slate-500">
+              Modules, activities, and worksheets for Empowerment Technologies.
+            </p>
+          </div>
+        </a>
+
+        <!-- General Science Card -->
+        <a href="/gensci"
+           class="flex items-start gap-4 p-5 transition-all duration-300 bg-white border shadow-md sm:p-6 hover:shadow-xl hover:-translate-y-1 rounded-2xl border-slate-200">
+          
+          <div class="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-yellow-500/10">
+            <span class="text-2xl text-yellow-500">🔬</span>
+          </div>
+
+          <div class="flex-1">
+            <h2 class="mb-1 text-lg font-semibold sm:text-xl text-slate-900">
+              General Science 11
+            </h2>
+            <p class="text-sm leading-snug text-slate-500">
+              Modules, activities, and worksheets for General Science.
+            </p>
+          </div>
+        </a>
+
+        <!-- Add More Subjects Here -->
+        <% if (typeof extraSubjects !== "undefined") { %>
+          <% extraSubjects.forEach(subj => { %>
+            <a href="/<%= subj.link %>"
+               class="flex items-start gap-4 p-5 transition-all duration-300 bg-white border shadow-md sm:p-6 hover:shadow-xl hover:-translate-y-1 rounded-2xl border-slate-200">
+              
+              <div class="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-green-500/10">
+                <span class="text-2xl text-green-500"><%= subj.icon %></span>
+              </div>
+
+              <div class="flex-1">
+                <h2 class="mb-1 text-lg font-semibold sm:text-xl text-slate-900">
+                  <%= subj.title %>
+                </h2>
+                <p class="text-sm leading-snug text-slate-500">
+                  <%= subj.description %>
+                </p>
+              </div>
+            </a>
+          <% }) %>
+        <% } %>
+
+      </div>
 
     </div>
+  </main>
 
-  </div>
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-200 py-6 mt-auto">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-2">
+          <div class="flex items-center justify-center w-8 h-8 rounded-lg bg-slate-100 text-base shadow-inner">
+            🎓
+          </div>
+          <span class="text-sm font-bold text-slate-700 tracking-wide">Grado 2026</span>
+        </div>
+        <div class="text-center sm:text-right">
+          <p class="text-xs text-slate-500">
+            &copy; 2026 Camalig National High School. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
 
 </body>
 </html>
