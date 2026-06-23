@@ -193,6 +193,17 @@ const subjects = {
           },
         ],
       },
+      {
+        title: "Lesson 2",
+        desc: "Translational and Rotational Motion",
+        items: [
+          {
+            name: "General Science Lesson 2.pdf",
+            link: "./files/gensci/GenSci-W2.pdf",
+            type: "pdf",
+          },
+        ],
+      },
     ],
   }
 };
