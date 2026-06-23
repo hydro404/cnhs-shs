@@ -159,6 +159,22 @@ const subjects = {
           // },
         ],
       },
+      {
+        title: "Lesson 2",
+        desc: "Software Applications and Platforms",
+        items: [
+          {
+            name: "EmTech Lesson 2.pdf",
+            link: "./files/emtech/2-Software Applications and Platforms.pdf",
+            type: "pdf",
+          },
+          // {
+          //   name: "Empowerment Technologies Activity 1.pdf",
+          //   link: "./files/emtech/Empowerment Technologies Activity 1.pdf",
+          //   type: "pdf",
+          // },
+        ],
+      },
     ],
   },
 
