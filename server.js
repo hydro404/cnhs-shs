@@ -175,6 +175,22 @@ const subjects = {
           // },
         ],
       },
+      {
+        title: "Lesson 3",
+        desc: "Online Safety, Security, Ethics and Etiquette Standards",
+        items: [
+          {
+            name: "EmTech Lesson 3.pdf",
+            link: "./files/emtech/3-Online Safety, Security, Ethics and Etiquette Standards.pdf",
+            type: "pdf",
+          },
+          // {
+          //   name: "Empowerment Technologies Activity 1.pdf",
+          //   link: "./files/emtech/Empowerment Technologies Activity 1.pdf",
+          //   type: "pdf",
+          // },
+        ],
+      },
     ],
   },
 
