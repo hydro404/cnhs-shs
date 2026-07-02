@@ -220,6 +220,17 @@ const subjects = {
           },
         ],
       },
+      {
+        title: "Lesson 3",
+        desc: "Simple and Compound Machines",
+        items: [
+          {
+            name: "General Science Lesson 3.pdf",
+            link: "./files/gensci/GenSci-W3.pdf",
+            type: "pdf",
+          },
+        ],
+      },
     ],
   }
 };
