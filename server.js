@@ -191,6 +191,17 @@ const subjects = {
           // },
         ],
       },
+      {
+        title: "Lesson 4",
+        desc: "Online Navigation",
+        items: [
+          {
+            name: "EmTech Lesson 4.pdf",
+            link: "./files/emtech/4-Online Navigation.pdf",
+            type: "pdf",
+          },
+        ],
+      }
     ],
   },
 
@@ -229,6 +240,16 @@ const subjects = {
             link: "./files/gensci/GenSci-W3.pdf",
             type: "pdf",
           },
+          {
+            name: "General Science Lesson 3 B.pdf",
+            link: "./files/gensci/GenSci-W3-2.pdf",
+            type: "pdf",
+          },
+          {
+            name: "General Science Lesson 3 C.pdf",
+            link: "./files/gensci/GenSci-W3-3.pdf",
+            type: "pdf",
+          }
         ],
       },
     ],
