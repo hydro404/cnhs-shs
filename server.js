@@ -201,6 +201,17 @@ const subjects = {
             type: "pdf",
           },
         ],
+      },
+      {
+        title: "Lesson 5",
+        desc: "Online Productivity Tool: Word",
+        items: [
+          {
+            name: "EmTech Lesson 5.pdf",
+            link: "./files/emtech/5-Productivity Tool - Word.pdf",
+            type: "pdf",
+          },
+        ],
       }
     ],
   },
