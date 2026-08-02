@@ -212,6 +212,17 @@ const subjects = {
             type: "pdf",
           },
         ],
+      },
+      {
+        title: "Lesson 6",
+        desc: "Online Productivity Tool: Slides",
+        items: [
+          {
+            name: "EmTech Lesson 6.pdf",
+            link: "./files/emtech/6-Productivity Tool - Slides.pdf",
+            type: "pdf",
+          },
+        ],
       }
     ],
   },
@@ -263,6 +274,22 @@ const subjects = {
           }
         ],
       },
+      {
+        title: "Lesson 4",
+        desc: "Fluid Mechanics",
+        items: [
+          {
+            name: "General Science Lesson 4 A.pdf",
+            link: "./files/gensci/GenSci-W4-1.pdf",
+            type: "pdf",
+          },
+          {
+            name: "General Science Lesson 4 B.pdf",
+            link: "./files/gensci/GenSci-W4-2.pdf",
+            type: "pdf",
+          }
+        ],
+      }
     ],
   }
 };
