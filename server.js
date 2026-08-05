@@ -223,6 +223,17 @@ const subjects = {
             type: "pdf",
           },
         ],
+      },
+      {
+        title: "Lesson 7",
+        desc: "Online Productivity Tool: Spreadsheet",
+        items: [
+          {
+            name: "EmTech Lesson 7.pdf",
+            link: "./files/emtech/7-Productivity Tool - Spreadsheet.pdf",
+            type: "pdf",
+          },
+        ],
       }
     ],
   },
