@@ -300,6 +300,17 @@ const subjects = {
             type: "pdf",
           }
         ],
+      },
+      {
+        title: "Lesson 5",
+        desc: "Utilization of Electricity: Electrical Safety Practices & Risk Assessment",
+        items: [
+          {
+            name: "General Science Lesson 5.pdf",
+            link: "./files/gensci/GenSci-W5.pdf",
+            type: "pdf",
+          },
+        ],
       }
     ],
   }
