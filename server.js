@@ -497,6 +497,10 @@ app.get("/movies", (req, res) => {
   });
 });
 
+app.get("/gensci/reviewer", (req, res) => {
+  res.sendFile(path.join(__dirname, "views", "general-science-quizbee.html"));
+});
+
 app.get("/:subject", (req, res) => {
   const subjectKey = req.params.subject;
 
