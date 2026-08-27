@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="General Science Term Exam results and class leaderboard.">
+  <title>General Science Term Exam Leaderboard</title>
+  <script>document.documentElement.classList.replace("no-js", "js");</script>
+  <style>
+    :root {
+      --ink: #171717;
+      --paper: #fffdf4;
+      --canvas: #e9e5d8;
+      --yellow: #f6d365;
+      --blue: #b9d8ff;
+      --coral: #ffb4a8;
+      --mint: #bce8cb;
+      --muted: #65645f;
+      --shadow: 5px 5px 0 var(--ink);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { color-scheme: light; scroll-behavior: smooth; }
+
+    body {
+      min-width: 320px;
+      min-height: 100vh;
+      margin: 0;
+      color: var(--ink);
+      background: var(--canvas);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    button, a { font: inherit; }
+
+    a { color: inherit; }
+
+    .skip-link {
+      position: fixed;
+      left: 12px;
+      top: 12px;
+      z-index: 100;
+      padding: 10px 14px;
+      border: 2px solid var(--ink);
+      background: white;
+      box-shadow: var(--shadow);
+      font-weight: 900;
+      transform: translateY(-150%);
+    }
+
+    .skip-link:focus { transform: translateY(0); }
+
+    .reveal-gate {
+      display: none;
+    }
+
+    .js .reveal-gate {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      padding: 20px;
+      background: var(--yellow);
+      isolation: isolate;
+    }
+
+    .js .reveal-gate[hidden] {
+      display: none;
+    }
+
+    .js .reveal-gate::before,
+    .js .reveal-gate::after {
+      content: "";
+      position: absolute;
+      inset-block: 0;
+      z-index: -1;
+      width: 51%;
+      border-color: var(--ink);
+      background-color: var(--paper);
+      background-image: linear-gradient(var(--ink) 2px, transparent 2px), linear-gradient(90deg, var(--ink) 2px, transparent 2px);
+      background-size: 42px 42px;
+      transition: transform .8s cubic-bezier(.76, 0, .24, 1);
+    }
+
+    .js .reveal-gate::before { left: 0; border-right: 2px solid var(--ink); }
+    .js .reveal-gate::after { right: 0; border-left: 2px solid var(--ink); }
+
+    .gate-card {
+      width: min(100%, 430px);
+      padding: 28px 22px;
+      border: 3px solid var(--ink);
+      border-radius: 12px;
+      background: var(--yellow);
+      box-shadow: 9px 9px 0 var(--ink);
+      text-align: center;
+      transition: opacity .28s ease, transform .45s ease;
+    }
+
+    .gate-label,
+    .eyebrow {
+      margin: 0;
+      font-size: .72rem;
+      font-weight: 950;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    .gate-card h1 {
+      margin: 12px 0;
+      font-size: clamp(2.25rem, 12vw, 4rem);
+      line-height: .95;
+      letter-spacing: -.06em;
+    }
+
+    .participant-count {
+      display: inline-block;
+      margin: 3px 0 22px;
+      padding: 7px 11px;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      background: white;
+      font-size: .82rem;
+      font-weight: 850;
+    }
+
+    .reveal-button,
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 48px;
+      padding: 12px 18px;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      color: white;
+      background: var(--ink);
+      box-shadow: 4px 4px 0 #77736a;
+      font-weight: 900;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform .14s ease, box-shadow .14s ease;
+    }
+
+    .reveal-button:hover,
+    .back-link:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 #77736a; }
+
+    .reveal-button:active,
+    .back-link:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 #77736a; }
+
+    .reveal-button:focus-visible,
+    .back-link:focus-visible { outline: 4px solid #5d92dc; outline-offset: 4px; }
+
+    .js.revealed .reveal-gate::before { transform: translateX(-108%) rotate(-3deg); }
+    .js.revealed .reveal-gate::after { transform: translateX(108%) rotate(3deg); }
+    .js.revealed .gate-card { opacity: 0; transform: scale(.88) rotate(-2deg); }
+
+    .burst {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .burst-piece {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 13px;
+      height: 13px;
+      border: 2px solid var(--ink);
+      background: var(--piece-color);
+      animation: burst-out .85s ease-out forwards;
+    }
+
+    .results-shell {
+      width: min(100%, 960px);
+      margin: 0 auto;
+      padding: 18px 14px 40px;
+    }
+
+    .js .results-shell {
+      height: 0;
+      overflow: hidden;
+      visibility: hidden;
+      opacity: 0;
+    }
+
+    .js.revealed .results-shell {
+      height: auto;
+      overflow: visible;
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .page-header {
+      position: relative;
+      margin-bottom: 22px;
+      padding: 23px 18px;
+      border: 3px solid var(--ink);
+      border-radius: 12px;
+      background: var(--yellow);
+      box-shadow: 7px 7px 0 var(--ink);
+    }
+
+    .page-header h1 {
+      max-width: 720px;
+      margin: 8px 0 12px;
+      font-size: clamp(2rem, 10vw, 4.6rem);
+      line-height: .98;
+      letter-spacing: -.055em;
+    }
+
+    .page-header p:not(.eyebrow) {
+      max-width: 580px;
+      margin: 0;
+      color: #3f3e39;
+      font-size: .95rem;
+      font-weight: 650;
+      line-height: 1.55;
+    }
+
+    .summary-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 18px;
+    }
+
+    .summary-chip {
+      padding: 7px 10px;
+      border: 2px solid var(--ink);
+      border-radius: 7px;
+      background: white;
+      font-size: .76rem;
+      font-weight: 900;
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+
+    .section-title {
+      margin: 29px 0 13px;
+      font-size: 1.15rem;
+      font-weight: 950;
+      letter-spacing: -.025em;
+    }
+
+    .podium,
+    .rank-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .podium { display: grid; gap: 14px; }
+
+    .podium-card {
+      position: relative;
+      padding: 19px 16px;
+      border: 3px solid var(--ink);
+      border-radius: 10px;
+      background: var(--card-color);
+      box-shadow: 6px 6px 0 var(--ink);
+    }
+
+    .podium-icon {
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      margin-bottom: 13px;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: white;
+      font-size: 1.55rem;
+    }
+
+    .podium-place { font-size: .7rem; font-weight: 950; letter-spacing: .14em; text-transform: uppercase; }
+    .podium-name { margin: 5px 0 13px; font-size: 1.25rem; line-height: 1.15; }
+    .podium-score { display: inline-block; padding: 6px 9px; border: 2px solid var(--ink); border-radius: 6px; background: white; font-weight: 950; }
+
+    .rank-list { display: grid; gap: 10px; }
+
+    .rank-card {
+      display: grid;
+      grid-template-columns: 47px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 10px;
+      min-height: 72px;
+      padding: 10px;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: var(--paper);
+      box-shadow: 4px 4px 0 var(--ink);
+    }
+
+    .rank-number {
+      display: grid;
+      place-items: center;
+      width: 43px;
+      height: 43px;
+      border: 2px solid var(--ink);
+      border-radius: 7px;
+      background: var(--blue);
+      font-size: .93rem;
+      font-weight: 950;
+    }
+
+    .student-name { margin: 0; font-size: .95rem; line-height: 1.24; }
+
+    .tie-badge,
+    .status-badge {
+      display: inline-block;
+      margin-top: 5px;
+      padding: 3px 6px;
+      border: 1.5px solid var(--ink);
+      border-radius: 5px;
+      background: var(--yellow);
+      font-size: .62rem;
+      font-weight: 900;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .score {
+      min-width: 60px;
+      text-align: right;
+      font-size: .98rem;
+      font-weight: 950;
+      white-space: nowrap;
+    }
+
+    .waiting-divider {
+      margin: 18px 0 2px;
+      padding: 10px 12px;
+      border: 2px dashed var(--ink);
+      border-radius: 7px;
+      background: var(--coral);
+      font-size: .76rem;
+      font-weight: 950;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .rank-card.unrecorded { background: #eeece4; }
+    .rank-card.unrecorded .rank-number { background: white; }
+    .rank-card.unrecorded .score { color: var(--muted); font-size: .75rem; white-space: normal; }
+    .status-badge { background: white; }
+
+    .page-footer {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 2px solid var(--ink);
+    }
+
+    .page-footer p { margin: 0; color: var(--muted); font-size: .78rem; font-weight: 700; }
+
+    .back-link { min-height: 44px; padding: 10px 15px; font-size: .84rem; }
+
+    .js.revealed .page-header { animation: stamp-in .56s cubic-bezier(.2, .9, .3, 1.25) both; }
+    .js.revealed .podium-card { animation: podium-in .58s cubic-bezier(.2, .9, .3, 1.18) both; animation-delay: var(--delay); }
+    .js.revealed .rank-card,
+    .js.revealed .waiting-divider { animation: row-in .42s ease both; animation-delay: var(--delay); }
+
+    @keyframes stamp-in { from { opacity: 0; transform: scale(.9) rotate(-1.5deg); } to { opacity: 1; transform: scale(1) rotate(0); } }
+    @keyframes podium-in { from { opacity: 0; transform: translateY(32px) rotate(1deg); } to { opacity: 1; transform: translateY(0) rotate(0); } }
+    @keyframes row-in { from { opacity: 0; transform: translateX(-18px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes burst-out { to { opacity: 0; transform: translate(var(--x), var(--y)) rotate(var(--r)); } }
+
+    @media (min-width: 720px) {
+      .results-shell { padding: 34px 24px 60px; }
+      .page-header { padding: 34px; }
+      .podium { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: end; }
+      .podium-card[data-rank="1"] { order: 2; min-height: 246px; }
+      .podium-card[data-rank="2"] { order: 1; min-height: 218px; }
+      .podium-card[data-rank="3"] { order: 3; min-height: 194px; }
+      .rank-card { grid-template-columns: 58px minmax(0, 1fr) 90px; padding: 12px 16px; }
+      .student-name { font-size: 1.05rem; }
+      .page-footer { flex-direction: row; align-items: center; justify-content: space-between; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; animation-delay: 0ms !important; transition-duration: .01ms !important; }
+      .burst { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#leaderboardTitle">Skip to results</a>
+
+  <section class="reveal-gate" id="revealGate" aria-labelledby="gateTitle">
+    <div class="gate-card">
+      <p class="gate-label">The scores are in</p>
+      <h1 id="gateTitle">Term Exam Results</h1>
+      <p class="participant-count"><%= totalStudents %> students • <%= recordedCount %> scores recorded</p>
+      <div>
+        <button class="reveal-button" id="revealButton" type="button" aria-controls="leaderboard" aria-expanded="false">
+          Reveal Leaderboard <span aria-hidden="true">✦</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <main class="results-shell" id="leaderboard">
+    <header class="page-header">
+      <p class="eyebrow">General Science • Term Exam</p>
+      <h1 id="leaderboardTitle" tabindex="-1">Class Leaderboard</h1>
+      <p>Scores are ranked from highest to lowest. Students with equal scores share the same place.</p>
+      <div class="summary-chips" aria-label="Results summary">
+        <span class="summary-chip"><%= recordedCount %> recorded</span>
+        <span class="summary-chip"><%= totalStudents - recordedCount %> awaiting results</span>
+        <span class="summary-chip"><%= maxScore %> possible points</span>
+      </div>
+    </header>
+
+    <% const podiumResults = results.filter((entry) => entry.rank !== null && entry.rank <= 3); %>
+    <% const remainingResults = results.filter((entry) => entry.rank === null || entry.rank > 3); %>
+
+    <section aria-labelledby="podiumTitle">
+      <h2 class="section-title" id="podiumTitle">Top performers</h2>
+      <ol class="podium">
+        <% podiumResults.forEach((entry) => { const icons = { 1: '🥇', 2: '🥈', 3: '🥉' }; const colors = { 1: 'var(--yellow)', 2: 'var(--blue)', 3: 'var(--coral)' }; %>
+          <li class="podium-card" data-rank="<%= entry.rank %>" style="--card-color:<%= colors[entry.rank] %>;--delay:<%= entry.rank * 100 %>ms">
+            <span class="podium-icon" aria-hidden="true"><%= icons[entry.rank] %></span>
+            <span class="podium-place">Place <%= entry.rank %></span>
+            <h3 class="podium-name"><%= entry.name %></h3>
+            <span class="podium-score"><%= entry.score %> / <%= maxScore %></span>
+          </li>
+        <% }); %>
+      </ol>
+    </section>
+
+    <section aria-labelledby="fullResultsTitle">
+      <h2 class="section-title" id="fullResultsTitle">Full results</h2>
+      <ol class="rank-list">
+        <% remainingResults.forEach((entry, index) => { %>
+          <% if (entry.rank === null && (index === 0 || remainingResults[index - 1].rank !== null)) { %>
+            <li class="waiting-divider" style="--delay:<%= Math.min(index * 32 + 350, 950) %>ms" role="presentation">Awaiting results</li>
+          <% } %>
+          <li class="rank-card <%= entry.rank === null ? 'unrecorded' : '' %>" style="--delay:<%= Math.min(index * 32 + 350, 950) %>ms">
+            <span class="rank-number" aria-label="<%= entry.rank === null ? 'Unranked' : `Place ${entry.rank}` %>"><%= entry.rank === null ? '—' : entry.rank %></span>
+            <div>
+              <h3 class="student-name"><%= entry.name %></h3>
+              <% if (entry.isTied) { %><span class="tie-badge">Tied place</span><% } %>
+              <% if (entry.rank === null) { %><span class="status-badge">Unranked</span><% } %>
+            </div>
+            <span class="score"><%= entry.rank === null ? entry.status : `${entry.score} / ${maxScore}` %></span>
+          </li>
+        <% }); %>
+      </ol>
+    </section>
+
+    <footer class="page-footer">
+      <p>Dense ranking is used: tied scores share a place and the next place follows in sequence.</p>
+      <a class="back-link" href="/gensci"><span aria-hidden="true">←</span> General Science</a>
+    </footer>
+  </main>
+
+  <p id="revealStatus" class="skip-link" aria-live="polite"></p>
+
+  <script>
+    const revealButton = document.getElementById("revealButton");
+    const revealGate = document.getElementById("revealGate");
+    const leaderboard = document.getElementById("leaderboard");
+    const leaderboardTitle = document.getElementById("leaderboardTitle");
+    const revealStatus = document.getElementById("revealStatus");
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    leaderboard.setAttribute("aria-hidden", "true");
+
+    function createBurst() {
+      if (reduceMotion.matches) return;
+      const colors = ["var(--yellow)", "var(--blue)", "var(--coral)", "var(--mint)"];
+      const layer = document.createElement("div");
+      layer.className = "burst";
+      layer.setAttribute("aria-hidden", "true");
+      for (let index = 0; index < 20; index += 1) {
+        const piece = document.createElement("i");
+        const angle = (Math.PI * 2 * index) / 20;
+        const distance = 110 + Math.random() * 190;
+        piece.className = "burst-piece";
+        piece.style.setProperty("--x", `${Math.cos(angle) * distance}px`);
+        piece.style.setProperty("--y", `${Math.sin(angle) * distance}px`);
+        piece.style.setProperty("--r", `${Math.random() * 420}deg`);
+        piece.style.setProperty("--piece-color", colors[index % colors.length]);
+        layer.appendChild(piece);
+      }
+      document.body.appendChild(layer);
+      window.setTimeout(() => layer.remove(), 900);
+    }
+
+    function revealLeaderboard() {
+      revealButton.disabled = true;
+      revealButton.setAttribute("aria-expanded", "true");
+      leaderboard.setAttribute("aria-hidden", "false");
+      document.documentElement.classList.add("revealed");
+      createBurst();
+      const delay = reduceMotion.matches ? 0 : 820;
+      window.setTimeout(() => {
+        revealGate.remove();
+        revealStatus.textContent = "Leaderboard revealed. General Science Term Exam results are now visible.";
+        leaderboardTitle.focus({ preventScroll: true });
+        leaderboardTitle.scrollIntoView({ block: "start", behavior: reduceMotion.matches ? "auto" : "smooth" });
+      }, delay);
+    }
+
+    revealButton.addEventListener("click", revealLeaderboard, { once: true });
+  </script>
+</body>
+</html>

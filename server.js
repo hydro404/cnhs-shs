@@ -472,6 +472,75 @@ const quizData = {
   },
 };
 
+const generalScienceTermExamResults = [
+  { name: "Arcabal, James Vincent", score: 41 },
+  { name: "Atos, Jhon Mark", score: 41 },
+  { name: "Bicamon, Renato", score: 48 },
+  { name: "Garcia, Steven Gabriel", score: 38 },
+  { name: "Gomez, John Patrick", score: 58 },
+  { name: "Guiriba, Rheynz Chester", score: 51 },
+  { name: "Gutierrez, Joshua", score: 17 },
+  { name: "Inciso, Renz Andrei", score: 45 },
+  { name: "Marcellana, Jhon Ed", score: 38 },
+  { name: "Miranda, Jery Maison", score: 47 },
+  { name: "Molenilla, Paul Cyruz", score: 56 },
+  { name: "Moral, Yoven", score: 45 },
+  { name: "Morcozo, Kurt", score: 48 },
+  { name: "Muni, Jamil", score: 55 },
+  { name: "Nabo, Khian Jay", score: 59 },
+  { name: "Napili, Dominic", score: 48 },
+  { name: "Navera, Arjay", score: 54 },
+  { name: "Nebreja, Gil", score: null, status: "Not yet recorded" },
+  { name: "Nuyda, Jhon Rheyn", score: 35 },
+  { name: "Nuyles, Jan Noelle", score: 48 },
+  { name: "Ovilla, John", score: 54 },
+  { name: "Rabina, Jaden Cyrus", score: 42 },
+  { name: "Reyes, Charles Dominic", score: 46 },
+  { name: "Reyes, Curt Paulo", score: 43 },
+  { name: "Samnaton, Jhied Allen", score: 54 },
+  { name: "Soriaga, Dustin Paul", score: null, status: "Not yet recorded" },
+  { name: "Tuiza, James", score: 45 },
+  { name: "Vibar, Angelo", score: 60 },
+  { name: "Camasis, Jhonna Myril", score: 56 },
+  { name: "Dado, Jeah Angel", score: 28 },
+  { name: "Dela Cruz, Alex Chloe", score: 55 },
+  { name: "Garcia, Bea", score: 49 },
+  { name: "Magdaraog, Ashley Jean", score: 50 },
+  { name: "Miraran, Princes Rhean", score: 37 },
+  { name: "Misolania, Reynalyn", score: 34 },
+  { name: "Moresca, Kyla", score: 53 },
+  { name: "Nacor, Princes Heart", score: 42 },
+  { name: "Nator, Hannah Therese", score: 46 },
+  { name: "Nisola, Vhench Castle", score: null, status: "Missing" },
+  { name: "Novelo, Jan Kialyn", score: 26 },
+  { name: "Racines, Samantha", score: 56 },
+  { name: "Vibar, Charess", score: 25 },
+];
+
+function buildDenseLeaderboard(entries) {
+  const recorded = entries
+    .filter((entry) => Number.isFinite(entry.score))
+    .sort((a, b) => b.score - a.score || a.name.localeCompare(b.name));
+  const unrecorded = entries
+    .filter((entry) => !Number.isFinite(entry.score))
+    .sort((a, b) => {
+      const statusOrder = { "Not yet recorded": 0, Missing: 1 };
+      return statusOrder[a.status] - statusOrder[b.status] || a.name.localeCompare(b.name);
+    });
+  const scoreCounts = recorded.reduce((counts, entry) => {
+    counts[entry.score] = (counts[entry.score] || 0) + 1;
+    return counts;
+  }, {});
+  let rank = 0;
+  let previousScore = null;
+  const ranked = recorded.map((entry) => {
+    if (entry.score !== previousScore) rank += 1;
+    previousScore = entry.score;
+    return { ...entry, rank, isTied: scoreCounts[entry.score] > 1 };
+  });
+  return [...ranked, ...unrecorded.map((entry) => ({ ...entry, rank: null, isTied: false }))];
+}
+
 // === ROUTES ===
 app.get("/physci/mini-quiz1", (req, res) => {
   res.render("mini-quiz", {
@@ -499,6 +568,16 @@ app.get("/movies", (req, res) => {
 
 app.get("/gensci/reviewer", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "general-science-quizbee.html"));
+});
+
+app.get("/gensci/term-exam-results", (req, res) => {
+  const results = buildDenseLeaderboard(generalScienceTermExamResults);
+  res.render("term-exam-leaderboard", {
+    results,
+    maxScore: 60,
+    totalStudents: results.length,
+    recordedCount: results.filter((entry) => entry.rank !== null).length,
+  });
 });
 
 app.get("/:subject", (req, res) => {

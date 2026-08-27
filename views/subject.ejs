@@ -39,9 +39,14 @@
       </div>
 
       <% if (subject === 'gensci') { %>
-      <a href="/gensci/reviewer" class="inline-flex items-center justify-center w-full px-5 py-3 text-sm font-bold text-white transition bg-slate-900 border-2 border-slate-900 shadow-[4px_4px_0_#94a3b8] rounded-lg sm:w-auto hover:-translate-y-0.5 hover:shadow-[6px_6px_0_#94a3b8] active:translate-x-1 active:translate-y-1 active:shadow-none focus:outline-none focus:ring-4 focus:ring-slate-300">
-        Open Reviewer
-      </a>
+      <div class="grid w-full gap-3 sm:w-auto">
+        <a href="/gensci/reviewer" class="inline-flex items-center justify-center w-full px-5 py-3 text-sm font-bold text-white transition bg-slate-900 border-2 border-slate-900 shadow-[4px_4px_0_#94a3b8] rounded-lg sm:w-auto hover:-translate-y-0.5 hover:shadow-[6px_6px_0_#94a3b8] active:translate-x-1 active:translate-y-1 active:shadow-none focus:outline-none focus:ring-4 focus:ring-slate-300">
+          Open Reviewer
+        </a>
+        <a href="/gensci/term-exam-results" class="inline-flex items-center justify-center w-full px-5 py-3 text-sm font-bold transition bg-amber-200 border-2 border-slate-900 text-slate-900 shadow-[4px_4px_0_#0f172a] rounded-lg sm:w-auto hover:-translate-y-0.5 hover:shadow-[6px_6px_0_#0f172a] active:translate-x-1 active:translate-y-1 active:shadow-none focus:outline-none focus:ring-4 focus:ring-amber-100">
+          Term Exam Results
+        </a>
+      </div>
       <% } %>
 
       <!-- Exam Button: below on mobile, inline on desktop -->
