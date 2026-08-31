@@ -311,6 +311,17 @@ const subjects = {
             type: "pdf",
           },
         ],
+      },
+      {
+        title: "Lesson 6",
+        desc: "Introduction to Waves",
+        items: [
+          {
+            name: "General Science Lesson 6.pdf",
+            link: "./files/gensci/GenSci-W6.pdf",
+            type: "pdf",
+          },
+        ],
       }
     ],
   }
