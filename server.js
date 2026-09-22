@@ -322,6 +322,17 @@ const subjects = {
             type: "pdf",
           },
         ],
+      },
+      {
+        title: "Term 2 - Lesson 1",
+        desc: "Introduction to Chemistry: Chemical Reactions in Our World",
+        items: [
+          {
+            name: "General Science Term 2 - Introduction to Chemistry.pdf",
+            link: "./files/gensci/GenSci-T2-Intro-to-Chemistry.pdf",
+            type: "pdf",
+          },
+        ],
       }
     ],
   }
