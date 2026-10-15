@@ -333,6 +333,28 @@ const subjects = {
             type: "pdf",
           },
         ],
+      },
+      {
+        title: "Term 2 - Lesson 2",
+        desc: "The Chemistry of Life & Earth",
+        items: [
+          {
+            name: "General Science Term 2 - Environmental Chemistry.pdf",
+            link: "./files/gensci/GenSci-T2-Environmental-Chemistry.pdf",
+            type: "pdf",
+          },
+        ],
+      },
+      {
+        title: "Term 2 - Lesson 3",
+        desc: "The Legacy of Louis Pasteur",
+        items: [
+          {
+            name: "General Science Term 2 - The Legacy of Louis Pasteur.pdf",
+            link: "./files/gensci/GenSci-T2-The-Legacy-of-Louis-Pasteur.pdf",
+            type: "pdf",
+          },
+        ],
       }
     ],
   }
@@ -590,6 +612,10 @@ app.get("/movies", (req, res) => {
 
 app.get("/gensci/reviewer", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "general-science-quizbee.html"));
+});
+
+app.get("/gensci/term2-reviewer", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "files", "gensci", "term2-reviewer.html"));
 });
 
 app.get("/gensci/term-exam-results", (req, res) => {
