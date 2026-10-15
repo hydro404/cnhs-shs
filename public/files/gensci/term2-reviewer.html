@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>General Science Quiz Bee</title>
+    <title>General Science Term 2 Reviewer</title>
     <style>
         :root {
             /* Fresh and vibrant projector-friendly dark theme */
@@ -177,37 +177,153 @@
             font-size: 3.5rem;
             margin-bottom: 4rem;
         }
+
+        /* Match the mobile-first design used by the 40-question reviewer. */
+        :root {
+            --paper: #fffdf6;
+            --ink: #171717;
+            --muted: #626262;
+            --line: #171717;
+            --soft: #f1efe6;
+            --accent: #f6d365;
+            --success: #c8f7d4;
+            --danger: #ffd5d2;
+        }
+        body {
+            min-height: 100vh;
+            display: block;
+            padding: 0;
+            color: var(--ink);
+            background: #e9e7df;
+            font-family: Inter, "Segoe UI", system-ui, sans-serif;
+        }
+        .shell { width: 100%; min-height: 100vh; }
+        .card {
+            min-height: 100vh;
+            padding: 20px 16px 28px;
+            overflow: visible;
+            color: var(--ink);
+            border: 0;
+            border-radius: 0;
+            background: var(--paper);
+            box-shadow: none;
+        }
+        header { align-items: flex-start; gap: 12px; margin-bottom: 18px; padding: 0; border: 0; }
+        .brand { display: flex; align-items: flex-start; gap: 11px; }
+        .brand-icon {
+            display: grid;
+            place-items: center;
+            width: 44px;
+            height: 44px;
+            flex: 0 0 auto;
+            color: var(--ink);
+            border: 2px solid var(--line);
+            border-radius: 8px;
+            background: var(--accent);
+            box-shadow: 3px 3px 0 var(--line);
+            font-size: 21px;
+        }
+        .kicker { margin: 0 0 2px; color: var(--muted); font-size: .67rem; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; }
+        h1 { margin: 0; color: var(--ink); font-size: 1.22rem; font-weight: 800; letter-spacing: -.025em; text-transform: none; }
+        .score { min-width: 78px; padding: 8px 10px; border: 2px solid var(--line); border-radius: 8px; background: white; box-shadow: 3px 3px 0 var(--line); text-align: center; }
+        .score-label { display: block; color: var(--muted); font-size: .62rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+        .score-value { display: block; margin-top: 1px; font-size: 1.04rem; font-weight: 950; font-variant-numeric: tabular-nums; }
+        .progress-track { height: 9px; margin-bottom: 18px; overflow: hidden; border: 2px solid var(--line); background: white; }
+        .progress-bar { width: 5%; height: 100%; background: var(--ink); transition: width .3s ease; }
+        .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+        .question-count, .topic { padding: 6px 9px; border: 2px solid var(--line); border-radius: 6px; color: var(--ink); background: white; font-size: .66rem; font-weight: 900; letter-spacing: .09em; text-transform: uppercase; }
+        .topic { background: var(--accent); }
+        .question { margin: 0 0 20px; color: var(--ink); font-size: clamp(1.42rem, 7vw, 2rem); line-height: 1.22; font-weight: 800; letter-spacing: -.035em; }
+        .choices { display: grid; grid-template-columns: 1fr; gap: 11px; }
+        .choice {
+            width: 100%;
+            min-height: 68px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            color: var(--ink);
+            border: 2px solid var(--line);
+            border-radius: 8px;
+            background: white;
+            box-shadow: 4px 4px 0 var(--line);
+            font: inherit;
+            font-size: 1rem;
+            font-weight: 700;
+            line-height: 1.3;
+            text-align: left;
+            cursor: pointer;
+            transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+        }
+        .choice:hover:not(:disabled) { transform: translate(-1px, -1px); box-shadow: 6px 6px 0 var(--line); }
+        .choice:active:not(:disabled) { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--line); }
+        .choice:focus-visible { outline: 4px solid #90b9ff; outline-offset: 3px; }
+        .choice:disabled { cursor: default; opacity: 1; }
+        .letter { display: grid; place-items: center; width: 38px; height: 38px; flex: 0 0 38px; border: 2px solid var(--line); border-radius: 6px; background: var(--soft); font-size: 1rem; font-weight: 950; }
+        .result { margin-left: auto; opacity: 0; font-size: 1.3rem; font-weight: 950; transform: scale(.65); transition: .2s ease; }
+        .choice.correct { color: var(--ink); border-color: var(--line); background: var(--success); box-shadow: 4px 4px 0 var(--line); }
+        .choice.wrong { color: var(--ink); border-color: var(--line); background: var(--danger); }
+        .choice.correct .letter, .choice.wrong .letter { color: var(--ink); border-color: var(--line); background: white; }
+        .choice.correct .result, .choice.wrong .result { opacity: 1; transform: scale(1); }
+        .choice.celebrate { animation: correct-pop .55s cubic-bezier(.2, .9, .25, 1.35); }
+        .feedback { min-height: 48px; margin-top: 17px; padding: 11px 12px; border: 2px solid transparent; border-radius: 8px; color: var(--muted); font-size: .88rem; font-weight: 650; line-height: 1.45; }
+        .feedback.correct { color: var(--ink); border-color: var(--line); background: var(--success); }
+        .feedback.wrong { color: var(--ink); border-color: var(--line); background: var(--danger); }
+        .footer { display: flex; justify-content: flex-end; margin-top: 10px; }
+        .next, .restart { display: none; align-items: center; gap: 8px; padding: 12px 17px; color: white; border: 2px solid var(--line); border-radius: 8px; background: var(--ink); box-shadow: 4px 4px 0 #818181; font: inherit; font-size: .94rem; font-weight: 900; cursor: pointer; }
+        .next:hover, .restart:hover { transform: translate(-1px, -1px); box-shadow: 6px 6px 0 #818181; }
+        #finish { display: none; text-align: center; padding: 70px 20px; }
+        .finish-mark { display: grid; place-items: center; width: 82px; height: 82px; margin: 0 auto 22px; color: var(--ink); border: 2px solid var(--line); border-radius: 12px; background: var(--accent); box-shadow: 6px 6px 0 var(--line); font-size: 2.3rem; }
+        #finish h2 { margin: 0 0 12px; color: var(--ink); font-size: clamp(2rem, 10vw, 3.5rem); }
+        #finish p { margin: 0 auto 28px; color: var(--muted); font-size: 1rem; line-height: 1.5; }
+        .final-score { display: inline-block; margin: 8px auto 24px; padding: 10px 14px; border: 2px solid var(--line); border-radius: 8px; background: white; box-shadow: 4px 4px 0 var(--line); font-size: 1.15rem; font-weight: 900; }
+        .celebration { position: fixed; inset: 0; z-index: 20; overflow: hidden; pointer-events: none; }
+        .spark { position: absolute; left: 50%; top: 52%; width: 10px; height: 14px; border: 2px solid var(--line); background: var(--accent); animation: burst .8s ease-out forwards; }
+        .spark:nth-child(3n) { background: #9fe3c2; }
+        .spark:nth-child(3n + 1) { background: #a9c9ff; }
+        .enter { animation: rise .38s ease both; }
+        @keyframes rise { from { opacity: 0; transform: translateY(11px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes correct-pop { 38% { transform: scale(1.035) rotate(-.6deg); } 68% { transform: scale(.99) rotate(.4deg); } }
+        @keyframes burst { to { opacity: 0; transform: translate(var(--x), var(--y)) rotate(var(--r)); } }
+        @media (min-width: 700px) {
+            .shell { display: grid; place-items: center; padding: 28px; }
+            .card { width: min(820px, 100%); min-height: auto; padding: 32px; border: 2px solid var(--line); border-radius: 12px; box-shadow: 9px 9px 0 var(--line); }
+            header { align-items: center; }
+            h1 { font-size: 1.6rem; }
+            .question { font-size: 2rem; }
+            .choices { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+        @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
     </style>
 </head>
 <body>
-
-    <div class="container" id="quiz-container">
-        <header>
-            <h1>General Science Quiz Bee</h1>
-            <div class="score-board">Score: <span id="score">0</span></div>
-        </header>
-
-        <div class="tracker" id="question-tracker">Question 1 / 20</div>
-
-        <div class="question-text" id="question-text">
-            <!-- Question text goes here -->
-        </div>
-
-        <div class="options-grid" id="options-grid">
-            <!-- Options dynamically injected here -->
-        </div>
-
-        <button id="next-btn" onclick="nextQuestion()">Next Question ➔</button>
-    </div>
-
-    <div class="container" id="finish-screen">
-        <h2>Quiz Complete!</h2>
-        <p>Your Final Score: <strong id="final-score">0</strong> / 20</p>
-        <button id="next-btn" style="display: inline-block; margin-top: 2rem;" onclick="location.reload()">Play Again</button>
-    </div>
+    <main class="shell">
+        <section class="card" id="quiz">
+            <header>
+                <div class="brand">
+                    <div class="brand-icon" aria-hidden="true">⚗</div>
+                    <div><p class="kicker">Self-paced practice</p><h1>General Science Term 2 Reviewer</h1></div>
+                </div>
+                <div class="score" aria-live="polite"><span class="score-label">Score</span><span class="score-value" id="scoreValue">0 / 20</span></div>
+            </header>
+            <div class="progress-track" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
+            <div class="meta"><span class="question-count" id="tracker">Question 1 of 20</span><span class="topic" id="topic"></span></div>
+            <div class="question" id="question"></div>
+            <div class="choices" id="choices"></div>
+            <div class="feedback" id="feedback" aria-live="polite">Choose the answer you think is correct.</div>
+            <div class="footer"><button class="next" id="next" type="button" onclick="nextQuestion()">Next question <span aria-hidden="true">→</span></button></div>
+        </section>
+        <section class="card" id="finish">
+            <div class="finish-mark" aria-hidden="true">✓</div>
+            <h2>Review complete.</h2>
+            <p>You worked through all 20 General Science Term 2 questions.</p>
+            <div class="final-score" id="finalScore"></div><br>
+            <button class="restart" type="button" onclick="restartQuiz()" style="display:inline-flex">Review again <span aria-hidden="true">↻</span></button>
+        </section>
+    </main>
 
     <script>
-        // Quiz Data - 20 items, uniform option lengths
+        // Twenty Term 2 questions covering chemistry, life processes, and metabolism.
         const allQuestions = [
             { q: "What type of reaction happens when one substance breaks down into simpler substances?", options: { A: "Combustion reaction", B: "Decomposition reaction", C: "Respiration process", D: "Photosynthesis process" }, answer: "B" },
             { q: "Which reaction happens when an acid reacts with a carbonate, such as vinegar reacting with baking soda?", options: { A: "Acid-carbonate reaction", B: "Combustion reaction", C: "Decomposition reaction", D: "Photosynthesis reaction" }, answer: "A" },
@@ -231,78 +347,142 @@
             { q: "Which statement best explains why metabolism is important for a person who is active?", options: { A: "It prevents the cells from using nutrients.", B: "It stops the body from producing new energy.", C: "It allows cells to get energy for activities.", D: "It only occurs while a person is fast asleep." }, answer: "C" }
         ];
 
-        // Shuffle the array
-        let questions = allQuestions.sort(() => Math.random() - 0.5);
+        allQuestions.forEach((question, index) => {
+            if (index < 5) question.topic = "Chemical Reactions";
+            else if (index < 9) question.topic = "Chemistry in Daily Life";
+            else if (index < 14) question.topic = "Photosynthesis & Respiration";
+            else question.topic = "Metabolism";
+        });
+
+        let questions = [];
         let currentIndex = 0;
         let score = 0;
-        let penaltyApplied = false; 
+        let answered = false;
 
-        const questionTextElement = document.getElementById("question-text");
-        const optionsGrid = document.getElementById("options-grid");
-        const nextBtn = document.getElementById("next-btn");
-        const scoreElement = document.getElementById("score");
-        const trackerElement = document.getElementById("question-tracker");
-        const quizContainer = document.getElementById("quiz-container");
-        const finishScreen = document.getElementById("finish-screen");
+        const questionEl = document.getElementById("question");
+        const choicesEl = document.getElementById("choices");
+        const trackerEl = document.getElementById("tracker");
+        const topicEl = document.getElementById("topic");
+        const progressBar = document.getElementById("progressBar");
+        const feedback = document.getElementById("feedback");
+        const scoreValue = document.getElementById("scoreValue");
+        const finalScore = document.getElementById("finalScore");
+        const nextBtn = document.getElementById("next");
+        const quiz = document.getElementById("quiz");
+        const finish = document.getElementById("finish");
+
+        function shuffled(items) {
+            const copy = [...items];
+            for (let index = copy.length - 1; index > 0; index--) {
+                const randomIndex = Math.floor(Math.random() * (index + 1));
+                [copy[index], copy[randomIndex]] = [copy[randomIndex], copy[index]];
+            }
+            return copy;
+        }
 
         function loadQuestion() {
-            penaltyApplied = false;
+            answered = false;
             nextBtn.style.display = "none";
-            optionsGrid.innerHTML = "";
-            
-            const currentQ = questions[currentIndex];
-            
-            trackerElement.innerText = `Question ${currentIndex + 1} / ${questions.length}`;
-            questionTextElement.innerText = currentQ.q;
+            choicesEl.innerHTML = "";
 
-            const letters = ['A', 'B', 'C', 'D'];
-            letters.forEach(letter => {
-                const btn = document.createElement("button");
-                btn.className = "option-btn";
-                btn.innerHTML = `<span class="option-letter">${letter}</span> ${currentQ.options[letter]}`;
-                btn.onclick = () => checkAnswer(letter, btn, currentQ.answer);
-                optionsGrid.appendChild(btn);
+            const item = questions[currentIndex];
+            trackerEl.textContent = `Question ${currentIndex + 1} of ${questions.length}`;
+            topicEl.textContent = item.topic;
+            progressBar.style.width = `${((currentIndex + 1) / questions.length) * 100}%`;
+            questionEl.textContent = item.q;
+            questionEl.classList.remove("enter");
+            void questionEl.offsetWidth;
+            questionEl.classList.add("enter");
+            feedback.className = "feedback";
+            feedback.textContent = "Choose the answer you think is correct.";
+            scoreValue.textContent = `${score} / ${questions.length}`;
+
+            const displayLetters = ["A", "B", "C", "D"];
+            shuffled(Object.entries(item.options)).forEach(([originalLetter, text], index) => {
+                const button = document.createElement("button");
+                button.className = "choice";
+                button.type = "button";
+                button.dataset.answer = originalLetter;
+                button.innerHTML = `<span class="letter">${displayLetters[index]}</span><span>${text}</span><span class="result" aria-hidden="true"></span>`;
+                button.onclick = () => checkAnswer(originalLetter, button, item.answer);
+                choicesEl.appendChild(button);
             });
         }
 
-        function checkAnswer(selectedLetter, buttonElement, correctLetter) {
-            if (selectedLetter === correctLetter) {
-                buttonElement.classList.add("correct");
-                
-                if (!penaltyApplied) {
-                    score++;
-                    scoreElement.innerText = score;
+        function checkAnswer(selected, button, correct) {
+            if (answered) return;
+            answered = true;
+
+            const buttons = [...choicesEl.querySelectorAll(".choice")];
+            buttons.forEach(choice => { choice.disabled = true; });
+
+            if (selected === correct) {
+                score++;
+                button.classList.add("correct", "celebrate");
+                button.querySelector(".result").textContent = "✓";
+                feedback.className = "feedback correct";
+                feedback.textContent = "Correct! Nice work - keep the momentum going.";
+                celebrate();
+            } else {
+                button.classList.add("wrong");
+                button.querySelector(".result").textContent = "×";
+                const correctButton = buttons.find(choice => choice.dataset.answer === correct);
+                if (correctButton) {
+                    correctButton.classList.add("correct");
+                    correctButton.querySelector(".result").textContent = "✓";
                 }
-                
-                const allButtons = document.querySelectorAll(".option-btn");
-                allButtons.forEach(btn => btn.disabled = true);
-                
-                nextBtn.style.display = "block";
-            } 
-            else {
-                buttonElement.classList.add("wrong");
-                buttonElement.disabled = true; 
-                penaltyApplied = true; 
+                feedback.className = "feedback wrong";
+                feedback.textContent = "Not quite. The correct answer is highlighted so you can review it.";
             }
+
+            scoreValue.textContent = `${score} / ${questions.length}`;
+            nextBtn.style.display = "inline-flex";
+            nextBtn.focus();
+        }
+
+        function celebrate() {
+            const layer = document.createElement("div");
+            layer.className = "celebration";
+            for (let index = 0; index < 18; index++) {
+                const spark = document.createElement("i");
+                spark.className = "spark";
+                const angle = (Math.PI * 2 * index) / 18;
+                const distance = 90 + Math.random() * 110;
+                spark.style.setProperty("--x", `${Math.cos(angle) * distance}px`);
+                spark.style.setProperty("--y", `${Math.sin(angle) * distance}px`);
+                spark.style.setProperty("--r", `${Math.random() * 360}deg`);
+                layer.appendChild(spark);
+            }
+            document.body.appendChild(layer);
+            window.setTimeout(() => layer.remove(), 850);
         }
 
         function nextQuestion() {
+            if (!answered) return;
             currentIndex++;
-            if (currentIndex < questions.length) {
-                loadQuestion();
-            } else {
-                showResults();
-            }
+            if (currentIndex < questions.length) loadQuestion();
+            else showFinish();
         }
 
-        function showResults() {
-            quizContainer.style.display = "none";
-            finishScreen.style.display = "block";
-            document.getElementById("final-score").innerText = score;
+        function showFinish() {
+            quiz.style.display = "none";
+            finish.style.display = "block";
+            finalScore.textContent = `Final score: ${score} / ${questions.length}`;
+            window.scrollTo({ top: 0, behavior: "smooth" });
         }
 
-        // Init
-        loadQuestion();
+        function restartQuiz() {
+            questions = shuffled(allQuestions);
+            currentIndex = 0;
+            score = 0;
+            answered = false;
+            finish.style.display = "none";
+            quiz.style.display = "block";
+            loadQuestion();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
+        restartQuiz();
     </script>
 </body>
 </html>
