@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empowerment Technologies Reviewer</title>
+    <style>
+        :root {
+            --paper: #fffdf6;
+            --ink: #171717;
+            --muted: #626262;
+            --line: #171717;
+            --soft: #f1efe6;
+            --accent: #a9c9ff;
+            --accent-strong: #2563eb;
+            --success: #c8f7d4;
+            --danger: #ffd5d2;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            color: var(--ink);
+            background: #e9e7df;
+            font-family: Inter, "Segoe UI", system-ui, sans-serif;
+        }
+
+        button { font: inherit; }
+        .shell { width: 100%; min-height: 100vh; }
+
+        .card {
+            min-height: 100vh;
+            padding: 20px 16px 28px;
+            overflow: visible;
+            background: var(--paper);
+        }
+
+        header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .brand { display: flex; align-items: flex-start; gap: 11px; }
+
+        .brand-icon {
+            display: grid;
+            place-items: center;
+            width: 44px;
+            height: 44px;
+            flex: 0 0 auto;
+            color: var(--ink);
+            border: 2px solid var(--line);
+            border-radius: 8px;
+            background: var(--accent);
+            box-shadow: 3px 3px 0 var(--line);
+            font-size: 21px;
+        }
+
+        .kicker {
+            margin: 0 0 2px;
+            color: var(--muted);
+            font-size: .67rem;
+            font-weight: 900;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 1.22rem;
+            line-height: 1.15;
+            letter-spacing: -.025em;
+        }
+
+        .score {
+            min-width: 82px;
+            padding: 8px 10px;
+            border: 2px solid var(--line);
+            border-radius: 8px;
+            background: white;
+            box-shadow: 3px 3px 0 var(--line);
+            text-align: center;
+        }
+
+        .score-label {
+            display: block;
+            color: var(--muted);
+            font-size: .62rem;
+            font-weight: 800;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+        }
+
+        .score-value {
+            display: block;
+            margin-top: 1px;
+            font-size: 1.04rem;
+            font-weight: 950;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .progress-track {
+            height: 9px;
+            margin-bottom: 18px;
+            overflow: hidden;
+            border: 2px solid var(--line);
+            background: white;
+        }
+
+        .progress-bar {
+            width: 2.5%;
+            height: 100%;
+            background: var(--accent-strong);
+            transition: width .3s ease;
+        }
+
+        .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+
+        .question-count,
+        .topic {
+            padding: 6px 9px;
+            border: 2px solid var(--line);
+            border-radius: 6px;
+            background: white;
+            font-size: .66rem;
+            font-weight: 900;
+            letter-spacing: .09em;
+            text-transform: uppercase;
+        }
+
+        .topic { background: var(--accent); }
+
+        .question {
+            margin: 0 0 20px;
+            font-size: clamp(1.42rem, 7vw, 2rem);
+            line-height: 1.22;
+            font-weight: 800;
+            letter-spacing: -.035em;
+        }
+
+        .choices { display: grid; grid-template-columns: 1fr; gap: 11px; }
+
+        .choice {
+            width: 100%;
+            min-height: 68px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            color: var(--ink);
+            border: 2px solid var(--line);
+            border-radius: 8px;
+            background: white;
+            box-shadow: 4px 4px 0 var(--line);
+            font-size: 1rem;
+            font-weight: 700;
+            line-height: 1.3;
+            text-align: left;
+            cursor: pointer;
+            transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+        }
+
+        .choice:hover:not(:disabled) { transform: translate(-1px, -1px); box-shadow: 6px 6px 0 var(--line); }
+        .choice:active:not(:disabled) { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--line); }
+        .choice:focus-visible { outline: 4px solid #90b9ff; outline-offset: 3px; }
+        .choice:disabled { cursor: default; opacity: 1; }
+
+        .letter {
+            display: grid;
+            place-items: center;
+            width: 38px;
+            height: 38px;
+            flex: 0 0 38px;
+            border: 2px solid var(--line);
+            border-radius: 6px;
+            background: var(--soft);
+            font-size: 1rem;
+            font-weight: 950;
+        }
+
+        .result {
+            margin-left: auto;
+            opacity: 0;
+            font-size: 1.3rem;
+            font-weight: 950;
+            transform: scale(.65);
+            transition: .2s ease;
+        }
+
+        .choice.correct { background: var(--success); }
+        .choice.wrong { background: var(--danger); }
+        .choice.correct .letter,
+        .choice.wrong .letter { background: white; }
+        .choice.correct .result,
+        .choice.wrong .result { opacity: 1; transform: scale(1); }
+        .choice.celebrate { animation: correct-pop .55s cubic-bezier(.2, .9, .25, 1.35); }
+
+        .feedback {
+            min-height: 48px;
+            margin-top: 17px;
+            padding: 11px 12px;
+            color: var(--muted);
+            border: 2px solid transparent;
+            border-radius: 8px;
+            font-size: .88rem;
+            font-weight: 650;
+            line-height: 1.45;
+        }
+
+        .feedback.correct { color: var(--ink); border-color: var(--line); background: var(--success); }
+        .feedback.wrong { color: var(--ink); border-color: var(--line); background: var(--danger); }
+        .footer { display: flex; justify-content: flex-end; margin-top: 10px; }
+
+        .next,
+        .restart,
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 17px;
+            color: white;
+            border: 2px solid var(--line);
+            border-radius: 8px;
+            background: var(--ink);
+            box-shadow: 4px 4px 0 #818181;
+            font-size: .94rem;
+            font-weight: 900;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .next { display: none; }
+        .next:hover,
+        .restart:hover,
+        .back-link:hover { transform: translate(-1px, -1px); box-shadow: 6px 6px 0 #818181; }
+
+        #finish { display: none; text-align: center; padding: 70px 20px; }
+
+        .finish-mark {
+            display: grid;
+            place-items: center;
+            width: 82px;
+            height: 82px;
+            margin: 0 auto 22px;
+            border: 2px solid var(--line);
+            border-radius: 12px;
+            background: var(--accent);
+            box-shadow: 6px 6px 0 var(--line);
+            font-size: 2.3rem;
+        }
+
+        #finish h2 { margin: 0 0 12px; font-size: clamp(2rem, 10vw, 3.5rem); }
+        #finish p { margin: 0 auto 28px; color: var(--muted); font-size: 1rem; line-height: 1.5; }
+
+        .final-score {
+            display: inline-block;
+            margin: 8px auto 24px;
+            padding: 10px 14px;
+            border: 2px solid var(--line);
+            border-radius: 8px;
+            background: white;
+            box-shadow: 4px 4px 0 var(--line);
+            font-size: 1.15rem;
+            font-weight: 900;
+        }
+
+        .finish-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
+        .back-link { color: var(--ink); background: white; }
+        .celebration { position: fixed; inset: 0; z-index: 20; overflow: hidden; pointer-events: none; }
+        .spark { position: absolute; left: 50%; top: 52%; width: 10px; height: 14px; border: 2px solid var(--line); background: #f6d365; animation: burst .8s ease-out forwards; }
+        .spark:nth-child(3n) { background: #9fe3c2; }
+        .spark:nth-child(3n + 1) { background: var(--accent); }
+        .enter { animation: rise .38s ease both; }
+
+        @keyframes rise { from { opacity: 0; transform: translateY(11px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes correct-pop { 38% { transform: scale(1.035) rotate(-.6deg); } 68% { transform: scale(.99) rotate(.4deg); } }
+        @keyframes burst { to { opacity: 0; transform: translate(var(--x), var(--y)) rotate(var(--r)); } }
+
+        @media (min-width: 700px) {
+            .shell { display: grid; place-items: center; padding: 28px; }
+            .card { width: min(860px, 100%); min-height: auto; padding: 32px; border: 2px solid var(--line); border-radius: 12px; box-shadow: 9px 9px 0 var(--line); }
+            header { align-items: center; }
+            h1 { font-size: 1.6rem; }
+            .question { font-size: 2rem; }
+            .choices { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+        }
+    </style>
+</head>
+<body>
+    <main class="shell">
+        <section class="card" id="quiz">
+            <header>
+                <div class="brand">
+                    <div class="brand-icon" aria-hidden="true">💻</div>
+                    <div>
+                        <p class="kicker">Self-paced practice</p>
+                        <h1>Empowerment Technologies Reviewer</h1>
+                    </div>
+                </div>
+                <div class="score" aria-live="polite">
+                    <span class="score-label">Score</span>
+                    <span class="score-value" id="scoreValue">0 / 40</span>
+                </div>
+            </header>
+
+            <div class="progress-track" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
+            <div class="meta">
+                <span class="question-count" id="tracker">Question 1 of 40</span>
+                <span class="topic" id="topic"></span>
+            </div>
+            <div class="question" id="question"></div>
+            <div class="choices" id="choices"></div>
+            <div class="feedback" id="feedback" aria-live="polite">Choose the answer you think is correct.</div>
+            <div class="footer">
+                <button class="next" id="next" type="button" onclick="nextQuestion()">Next question <span aria-hidden="true">→</span></button>
+            </div>
+        </section>
+
+        <section class="card" id="finish">
+            <div class="finish-mark" aria-hidden="true">✓</div>
+            <h2>Review complete.</h2>
+            <p>You worked through all 40 Empowerment Technologies questions.</p>
+            <div class="final-score" id="finalScore"></div>
+            <div class="finish-actions">
+                <button class="restart" type="button" onclick="restartQuiz()">Review again <span aria-hidden="true">↻</span></button>
+                <a class="back-link" href="/emtech">Back to materials</a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const allQuestions = [
+            { topic: "Image Formats", q: "Which file extension identifies a Joint Photographic Experts Group image?", options: { A: "Graphics interchange image (.gif)", B: "Joint photographic image (.jpg)", C: "Portable network graphic (.png)", D: "Plain unformatted document (.txt)" }, answer: "B" },
+            { topic: "Image Formats", q: "Which image format is commonly used for short, repeating animations?", options: { A: "JPEG for detailed still photographs", B: "PNG for lossless transparent graphics", C: "GIF for short repeating animations", D: "TXT for plain unformatted writing" }, answer: "C" },
+            { topic: "Visual Design", q: "An infographic contains long paragraphs, unrelated images, and excessive decoration. What is its main design problem?", options: { A: "The layout lacks visual simplicity", B: "The layout lacks platform sharing", C: "The layout lacks original branding", D: "The layout lacks image resolution" }, answer: "A" },
+            { topic: "Visual Design", q: "A designer places a picture beside its caption to show that they belong together. Which principle is being applied?", options: { A: "Proximity groups related content", B: "Balance distributes visual weight", C: "Repetition creates consistent patterns", D: "Contrast separates unlike elements" }, answer: "A" },
+            { topic: "Visual Design", q: "Why should unnecessary information be removed from an infographic?", options: { A: "To increase the document file size", B: "To clarify the message and reduce distraction", C: "To display more decorative components", D: "To give every element equal attention" }, answer: "B" },
+            { topic: "Visual Design", q: "Which infographic would communicate a school safety reminder most effectively online?", options: { A: "Dense text paired with unrelated illustrations", B: "Copied content paired with generic decorations", C: "Clear wording paired with relevant safety visuals", D: "Lengthy explanations paired with crowded graphics" }, answer: "C" },
+            { topic: "Visual Design", q: "A webpage places its key announcement in a large, bold heading at the center. Which principle is most evident?", options: { A: "Repetition builds a recurring pattern", B: "Emphasis directs attention to a focal point", C: "Proximity groups connected information", D: "Rhythm creates an organized visual flow" }, answer: "B" },
+            { topic: "Image Formats", q: "Why is JPEG commonly used for photographs on the web?", options: { A: "It stores short sequences of animated frames", B: "It compresses photographs containing many colors", C: "It preserves fully transparent image backgrounds", D: "It limits images to monochrome information" }, answer: "B" },
+            { topic: "Image Editing", q: "An entire photograph is too dark and its subject is difficult to see. Which adjustment is most appropriate?", options: { A: "Increase contrast between light and dark areas", B: "Raise brightness across the entire photograph", C: "Enlarge dimensions while preserving proportions", D: "Replace the background with a lighter color" }, answer: "B" },
+            { topic: "Image Editing", q: "A photograph looks stretched after being enlarged. What should have been preserved?", options: { A: "The photograph's overall brightness level", B: "The photograph's original tonal contrast", C: "The photograph's original aspect ratio", D: "The photograph's background color scheme" }, answer: "C" },
+            { topic: "Image Editing", q: "Which editing technique removes unwanted outer portions of an image?", options: { A: "Brightness changes the overall light level", B: "Resizing changes the image dimensions", C: "Cropping removes unnecessary outer areas", D: "Contrast separates light and dark values" }, answer: "C" },
+            { topic: "Image Editing", q: "How can increasing contrast improve an image?", options: { A: "It separates nearby and distant objects", B: "It balances larger and smaller objects", C: "It harmonizes warm and cool colors", D: "It distinguishes light and dark areas" }, answer: "D" },
+            { topic: "Image Hosting", q: "You want to share a class photo online and open it from another device. What should you do?", options: { A: "Upload it to an online image-storage service", B: "Resize it with an offline editing application", C: "Adjust it with an offline editing application", D: "Rename it with a different local filename" }, answer: "A" },
+            { topic: "Visual Design", q: "Which change would best improve a crowded disaster-preparedness infographic?", options: { A: "Add more visuals and decorative details", B: "Combine additional fonts and bright colors", C: "Give every section equal visual emphasis", D: "Group essential points and highlight key details" }, answer: "D" },
+            { topic: "User Experience", q: "Which design would provide the best experience on an online information page?", options: { A: "Crowded layout with detailed paragraphs and decoration", B: "Colorful layout with tiny type and repeated graphics", C: "Structured layout with readable type and relevant media", D: "Sparse layout with lengthy copy and unrelated visuals" }, answer: "C" },
+            { topic: "Interactivity", q: "A learning page lets students click buttons, drag objects, and choose which content opens next. What does this illustrate?", options: { A: "Cloud-based image hosting", B: "Cross-platform shareability", C: "User-controlled interactivity", D: "Integrated multimedia content" }, answer: "C" },
+
+            { topic: "Online Platforms", q: "Why might a student choose WordPress for a career portfolio?", options: { A: "It edits and trims recorded audio tracks", B: "It hosts real-time video conference sessions", C: "It archives private files without publishing", D: "It publishes structured content on the web" }, answer: "D" },
+            { topic: "Presentation Tools", q: "Which online tool is specifically designed for creating visual presentations?", options: { A: "Audio Trimmer edits recorded sound", B: "Google Drive organizes stored files", C: "QuickMeme produces captioned images", D: "Haiku Deck builds visual presentations" }, answer: "D" },
+            { topic: "Collaboration", q: "Which application allows students to write and edit a proposal together online?", options: { A: "QuickMeme for shared meme layouts", B: "Powtoon for animated story projects", C: "Audio Trimmer for recorded sound clips", D: "Google Docs for shared proposal editing" }, answer: "D" },
+            { topic: "Design Tools", q: "Why is Canva appropriate for creating a workplace-safety infographic?", options: { A: "It supplies visual templates and graphic assets", B: "It supplies private messaging and video calls", C: "It supplies cloud folders and file backups", D: "It supplies audio cutting and sound mixing" }, answer: "A" },
+            { topic: "Presentation Tools", q: "Which online tool creates presentations that combine images, video, and graphics?", options: { A: "Audio Trimmer edits recorded sound clips", B: "Google Drive stores and shares project files", C: "QuickMeme creates captioned image posts", D: "Prezi combines visual presentation media" }, answer: "D" },
+            { topic: "Choosing Tools", q: "A group uses an audio editor to create a data infographic. What is the main problem with that choice?", options: { A: "The tool's purpose does not match the output", B: "The tool may require a subscription payment", C: "The tool may work poorly in older browsers", D: "The tool may limit some file-sharing options" }, answer: "A" },
+            { topic: "Presentation Tools", q: "Which tool specializes in creating narrated animated presentations?", options: { A: "Gmail sends and receives email messages", B: "Google Drive stores and shares project files", C: "Audio Trimmer shortens recorded sound clips", D: "Powtoon creates narrated animated presentations" }, answer: "D" },
+            { topic: "Cloud Storage", q: "How does Google Drive support a team that is developing ICT content?", options: { A: "It automatically drafts every project script", B: "It generates every infographic design", C: "It stores and shares the team's resources", D: "It removes the need to review project files" }, answer: "C" },
+            { topic: "Choosing Tools", q: "A student uses Canva to design a poster and Google Drive to give the team access. Why is this combination appropriate?", options: { A: "Both tools duplicate the same design task", B: "One designs while the other shares files", C: "Both tools operate mainly as video editors", D: "Both tools eliminate the need for planning" }, answer: "B" },
+            { topic: "Choosing Tools", q: "What is the most important factor when selecting an online tool for an ICT project?", options: { A: "The number of decorative graphics included", B: "The application's popularity among other users", C: "The visual appearance of the application's logo", D: "The tool's suitability for the planned outcome" }, answer: "D" },
+            { topic: "Design Tools", q: "Which application is mainly used to design infographics?", options: { A: "Messenger supports private online conversations", B: "Piktochart builds visual infographic layouts", C: "Audio Trimmer edits recorded sound clips", D: "Google Drive stores and shares online files" }, answer: "B" },
+            { topic: "Online Platforms", q: "Which platform provides geographical information about locations and routes?", options: { A: "Google Drive provides cloud file storage", B: "Google Docs provides collaborative writing", C: "Google Maps provides geographic information", D: "Google Sites provides website publishing" }, answer: "C" },
+            { topic: "Website Tools", q: "Which online platform can be used to build and publish a website for a school project?", options: { A: "CapCut for editing video projects", B: "WordPress for building website content", C: "TwistedWave for editing online audio", D: "Audio Trimmer for shortening sound clips" }, answer: "B" },
+            { topic: "Collaboration", q: "A group needs an online tool that lets members work together. Which feature should they prioritize?", options: { A: "A collection of decorative visual effects", B: "Shared editing and commenting controls", C: "A selection of animated page backgrounds", D: "A set of colorful application icons" }, answer: "B" },
+
+            { topic: "Web Design", q: "Which web design principle concerns the distribution of visually heavy and light elements?", options: { A: "Visual language creates a consistent style", B: "Balance distributes the visual weight", C: "Content focus prioritizes useful information", D: "Grid layout aligns sections and columns" }, answer: "B" },
+            { topic: "Web Design", q: "A school website contains excessive and unnecessary decoration. Which principle should be applied?", options: { A: "Improve loading through smaller files", B: "Develop a stronger visual language", C: "Redistribute elements for visual balance", D: "Simplify the layout and remove clutter" }, answer: "D" },
+            { topic: "Readability", q: "A school website uses text colors that are difficult to read against the background. What should be improved?", options: { A: "Visual language and color contrast", B: "Element balance and visual weight", C: "Loading speed and file compression", D: "Grid structure and column alignment" }, answer: "A" },
+            { topic: "Navigation", q: "Which practice best follows navigation as a basic web design element?", options: { A: "Add animated effects to every menu", B: "Use direct and consistent menu labels", C: "Hide important pages from the menu", D: "Scatter links across unrelated sections" }, answer: "B" },
+            { topic: "Consistency", q: "A website uses unrelated layouts, colors, and styles on every page. Which principle would most directly correct this?", options: { A: "Use a consistent visual language", B: "Reduce the loading time of images", C: "Offer visitors additional choices", D: "Increase the weight of visual elements" }, answer: "A" },
+            { topic: "Planning", q: "A group is creating a school website with Google Sites. What should they do first?", options: { A: "Collect decorative images for each page", B: "Publish an unfinished version of the site", C: "Plan the site's content and structure", D: "Insert animated graphics into the header" }, answer: "C" },
+            { topic: "Website Tools", q: "Which platform is a free drag-and-drop website builder integrated with Google Drive?", options: { A: "Wix as an independent website builder", B: "WordPress as a content-management system", C: "Google Sites with integrated Drive content", D: "Google Drive as a cloud-storage platform" }, answer: "C" },
+            { topic: "Web Layout", q: "Which principle helps arrange website content into organized columns and sections?", options: { A: "Visual language for consistent styling", B: "Grid-based layout for aligned sections", C: "Load-time design for faster delivery", D: "Choice reduction for simpler decisions" }, answer: "B" },
+            { topic: "Web Content", q: "A school website has lengthy paragraphs that are difficult to understand. What should the designer do?", options: { A: "Add decorative pictures beside every paragraph", B: "Use several font styles within each paragraph", C: "Place animated transitions between all sections", D: "Shorten the content and organize key points" }, answer: "D" },
+            { topic: "Usability", q: "Site A has clear menus, readable text, and organized content. Site B has confusing menus, crowded images, and tiny text. Which conclusion is best?", options: { A: "Site A offers stronger usability and readability", B: "Site B offers stronger usability and readability", C: "Site A has weaker navigation and organization", D: "Site B presents clearer content and organization" }, answer: "A" }
+        ];
+
+        let questions = [];
+        let currentIndex = 0;
+        let score = 0;
+        let answered = false;
+
+        const questionEl = document.getElementById("question");
+        const choicesEl = document.getElementById("choices");
+        const trackerEl = document.getElementById("tracker");
+        const topicEl = document.getElementById("topic");
+        const progressBar = document.getElementById("progressBar");
+        const feedback = document.getElementById("feedback");
+        const scoreValue = document.getElementById("scoreValue");
+        const finalScore = document.getElementById("finalScore");
+        const nextBtn = document.getElementById("next");
+        const quiz = document.getElementById("quiz");
+        const finish = document.getElementById("finish");
+
+        function shuffled(items) {
+            const copy = [...items];
+            for (let index = copy.length - 1; index > 0; index--) {
+                const randomIndex = Math.floor(Math.random() * (index + 1));
+                [copy[index], copy[randomIndex]] = [copy[randomIndex], copy[index]];
+            }
+            return copy;
+        }
+
+        function loadQuestion() {
+            answered = false;
+            nextBtn.style.display = "none";
+            choicesEl.innerHTML = "";
+
+            const item = questions[currentIndex];
+            trackerEl.textContent = `Question ${currentIndex + 1} of ${questions.length}`;
+            topicEl.textContent = item.topic;
+            progressBar.style.width = `${((currentIndex + 1) / questions.length) * 100}%`;
+            questionEl.textContent = item.q;
+            questionEl.classList.remove("enter");
+            void questionEl.offsetWidth;
+            questionEl.classList.add("enter");
+            feedback.className = "feedback";
+            feedback.textContent = "Choose the answer you think is correct.";
+            scoreValue.textContent = `${score} / ${questions.length}`;
+
+            const displayLetters = ["A", "B", "C", "D"];
+            shuffled(Object.entries(item.options)).forEach(([answerKey, text], index) => {
+                const button = document.createElement("button");
+                button.className = "choice";
+                button.type = "button";
+                button.dataset.answer = answerKey;
+                button.innerHTML = `<span class="letter">${displayLetters[index]}</span><span>${text}</span><span class="result" aria-hidden="true"></span>`;
+                button.addEventListener("click", () => checkAnswer(answerKey, button, item.answer));
+                choicesEl.appendChild(button);
+            });
+        }
+
+        function checkAnswer(selected, button, correct) {
+            if (answered) return;
+            answered = true;
+
+            const buttons = [...choicesEl.querySelectorAll(".choice")];
+            buttons.forEach(choice => { choice.disabled = true; });
+
+            if (selected === correct) {
+                score++;
+                button.classList.add("correct", "celebrate");
+                button.querySelector(".result").textContent = "✓";
+                feedback.className = "feedback correct";
+                feedback.textContent = "Correct! Nice work - keep the momentum going.";
+                celebrate();
+            } else {
+                button.classList.add("wrong");
+                button.querySelector(".result").textContent = "×";
+                const correctButton = buttons.find(choice => choice.dataset.answer === correct);
+                if (correctButton) {
+                    correctButton.classList.add("correct");
+                    correctButton.querySelector(".result").textContent = "✓";
+                }
+                feedback.className = "feedback wrong";
+                feedback.textContent = "Not quite. The correct answer is highlighted so you can review it.";
+            }
+
+            scoreValue.textContent = `${score} / ${questions.length}`;
+            nextBtn.style.display = "inline-flex";
+            nextBtn.focus();
+        }
+
+        function celebrate() {
+            const layer = document.createElement("div");
+            layer.className = "celebration";
+            for (let index = 0; index < 18; index++) {
+                const spark = document.createElement("i");
+                spark.className = "spark";
+                const angle = (Math.PI * 2 * index) / 18;
+                const distance = 90 + Math.random() * 110;
+                spark.style.setProperty("--x", `${Math.cos(angle) * distance}px`);
+                spark.style.setProperty("--y", `${Math.sin(angle) * distance}px`);
+                spark.style.setProperty("--r", `${Math.random() * 360}deg`);
+                layer.appendChild(spark);
+            }
+            document.body.appendChild(layer);
+            window.setTimeout(() => layer.remove(), 850);
+        }
+
+        function nextQuestion() {
+            if (!answered) return;
+            currentIndex++;
+            if (currentIndex < questions.length) loadQuestion();
+            else showFinish();
+        }
+
+        function showFinish() {
+            quiz.style.display = "none";
+            finish.style.display = "block";
+            finalScore.textContent = `Final score: ${score} / ${questions.length}`;
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
+        function restartQuiz() {
+            questions = shuffled(allQuestions);
+            currentIndex = 0;
+            score = 0;
+            answered = false;
+            finish.style.display = "none";
+            quiz.style.display = "block";
+            loadQuestion();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
+        restartQuiz();
+    </script>
+</body>
+</html>

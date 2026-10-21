@@ -618,6 +618,10 @@ app.get("/gensci/term2-reviewer", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "files", "gensci", "term2-reviewer.html"));
 });
 
+app.get("/emtech/reviewer", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "files", "emtech", "reviewer.html"));
+});
+
 app.get("/gensci/term-exam-results", (req, res) => {
   const results = buildDenseLeaderboard(generalScienceTermExamResults);
   res.render("term-exam-leaderboard", {
