@@ -243,6 +243,28 @@ const subjects = {
     description: "Click to download lesson modules and activities.",
     files: [
       {
+        title: "Term 2 - Lesson 4",
+        desc: "Solutions",
+        items: [
+          {
+            name: "General Science Term 2 - Solutions.pdf",
+            link: "./files/gensci/GenSci-T2-Solutions.pdf",
+            type: "pdf",
+          },
+        ],
+      },
+      {
+        title: "Term 2 - Lesson 5",
+        desc: "Living Things Are Systems",
+        items: [
+          {
+            name: "General Science Term 2 - Living Things Are Systems.pdf",
+            link: "./files/gensci/GenSci-T2-Living Things Are Systems.pdf",
+            type: "pdf",
+          },
+        ],
+      },
+      {
         title: "Lesson 1",
         desc: "Physics in Daily Life",
         items: [
