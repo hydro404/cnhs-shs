@@ -265,6 +265,28 @@ const subjects = {
         ],
       },
       {
+        title: "Term 2 - Lesson 6",
+        desc: "One Team, Many Parts",
+        items: [
+          {
+            name: "General Science Term 2 - One Team, Many Parts.pdf",
+            link: "./files/gensci/GenSci-T2-One Team, Many Parts.pdf",
+            type: "pdf",
+          },
+        ],
+      },
+      {
+        title: "Term 2 - Lesson 7",
+        desc: "From Plate to Power: How Cells Get Energy",
+        items: [
+          {
+            name: "General Science Term 2 - From Plate to Power.pdf",
+            link: "./files/gensci/GenSci-T2-From Plate to Power How Cells Get Energy.pdf",
+            type: "pdf",
+          },
+        ],
+      },
+      {
         title: "Lesson 1",
         desc: "Physics in Daily Life",
         items: [
