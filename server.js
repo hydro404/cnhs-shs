@@ -662,6 +662,10 @@ app.get("/gensci/term2-reviewer", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "files", "gensci", "term2-reviewer.html"));
 });
 
+app.get("/gensci/t2-st2-reviewer", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "files", "gensci", "t2-st2-reviewer.html"));
+});
+
 app.get("/emtech/reviewer", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "files", "emtech", "reviewer.html"));
 });
