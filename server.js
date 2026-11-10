@@ -286,6 +286,17 @@ const subjects = {
         ],
       },
       {
+        title: "Term 2 - Lesson 8",
+        desc: "Our Changing Climate",
+        items: [
+          {
+            name: "General Science Term 2 - Our Changing Climate.pdf",
+            link: "./files/gensci/GenSci-T2-Our Changing Climate.pdf",
+            type: "pdf",
+          },
+        ],
+      },
+      {
         title: "Lesson 1",
         desc: "Physics in Daily Life",
         items: [
