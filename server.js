@@ -242,61 +242,6 @@ const subjects = {
     description: "Click to download lesson modules and activities.",
     files: [
       {
-        title: "Term 2 - Lesson 4",
-        desc: "Solutions",
-        items: [
-          {
-            name: "General Science Term 2 - Solutions.pdf",
-            link: "./files/gensci/GenSci-T2-Solutions.pdf",
-            type: "pdf",
-          },
-        ],
-      },
-      {
-        title: "Term 2 - Lesson 5",
-        desc: "Living Things Are Systems",
-        items: [
-          {
-            name: "General Science Term 2 - Living Things Are Systems.pdf",
-            link: "./files/gensci/GenSci-T2-Living Things Are Systems.pdf",
-            type: "pdf",
-          },
-        ],
-      },
-      {
-        title: "Term 2 - Lesson 6",
-        desc: "From Plate to Power: How Cells Get Energy",
-        items: [
-          {
-            name: "General Science Term 2 - From Plate to Power.pdf",
-            link: "./files/gensci/GenSci-T2-From Plate to Power How Cells Get Energy.pdf",
-            type: "pdf",
-          },
-        ],
-      },
-      {
-        title: "Term 2 - Lesson 7",
-        desc: "One Team, Many Parts",
-        items: [
-          {
-            name: "General Science Term 2 - One Team, Many Parts.pdf",
-            link: "./files/gensci/GenSci-T2-One Team, Many Parts.pdf",
-            type: "pdf",
-          },
-        ],
-      },
-      {
-        title: "Term 2 - Lesson 8",
-        desc: "Our Changing Climate",
-        items: [
-          {
-            name: "General Science Term 2 - Our Changing Climate.pdf",
-            link: "./files/gensci/GenSci-T2-Our Changing Climate.pdf",
-            type: "pdf",
-          },
-        ],
-      },
-      {
         title: "Lesson 1",
         desc: "Physics in Daily Life",
         items: [
@@ -406,6 +351,61 @@ const subjects = {
           {
             name: "General Science Term 2 - The Legacy of Louis Pasteur.pdf",
             link: "./files/gensci/GenSci-T2-The-Legacy-of-Louis-Pasteur.pdf",
+            type: "pdf",
+          },
+        ],
+      },
+      {
+        title: "Term 2 - Lesson 4",
+        desc: "Solutions",
+        items: [
+          {
+            name: "General Science Term 2 - Solutions.pdf",
+            link: "./files/gensci/GenSci-T2-Solutions.pdf",
+            type: "pdf",
+          },
+        ],
+      },
+      {
+        title: "Term 2 - Lesson 5",
+        desc: "Living Things Are Systems",
+        items: [
+          {
+            name: "General Science Term 2 - Living Things Are Systems.pdf",
+            link: "./files/gensci/GenSci-T2-Living Things Are Systems.pdf",
+            type: "pdf",
+          },
+        ],
+      },
+      {
+        title: "Term 2 - Lesson 6",
+        desc: "From Plate to Power: How Cells Get Energy",
+        items: [
+          {
+            name: "General Science Term 2 - From Plate to Power.pdf",
+            link: "./files/gensci/GenSci-T2-From Plate to Power How Cells Get Energy.pdf",
+            type: "pdf",
+          },
+        ],
+      },
+      {
+        title: "Term 2 - Lesson 7",
+        desc: "One Team, Many Parts",
+        items: [
+          {
+            name: "General Science Term 2 - One Team, Many Parts.pdf",
+            link: "./files/gensci/GenSci-T2-One Team, Many Parts.pdf",
+            type: "pdf",
+          },
+        ],
+      },
+      {
+        title: "Term 2 - Lesson 8",
+        desc: "Our Changing Climate",
+        items: [
+          {
+            name: "General Science Term 2 - Our Changing Climate.pdf",
+            link: "./files/gensci/GenSci-T2-Our Changing Climate.pdf",
             type: "pdf",
           },
         ],
